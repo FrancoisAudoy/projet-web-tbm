@@ -18,7 +18,7 @@
   </li>
 </ul>
 <p>
-  <ngb-alert [dismissible]="false">
+  <ngb-alert *ngIf="!closed" (close)="closed=true">
     <strong>Warning!</strong> Sample alert.
   </ngb-alert>
 </p>
