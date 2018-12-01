@@ -1,6 +1,9 @@
 language: node_js
 node_js: lts/*
 
+addons:
+ firefox: latest
+
 before_install: cd front
 
 install: npm install
