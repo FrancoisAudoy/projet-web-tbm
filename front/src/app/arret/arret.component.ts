@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Arret } from '../arret'
 
 @Component({
   selector: 'app-arret',
@@ -6,6 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./arret.component.css']
 })
 export class ArretComponent implements OnInit {
+  ARRETS: Arret[]=[
+    {id: 1, name: "Chemin Bon Air", line: "bus", lineName: "34", type:"corol"},
+    {id: 2, name: "Stade Cruchon", line: "bus", lineName: "34", type:"corol"},
+    {id: 3, name: "Les Menhirs", line: "bus", lineName: "34", type:"corol"},
+    {id: 4, name: "Lycée Pape Clément", line: "bus", lineName: "34", type:"corol"},
+    {id: 5, name: "Pont de l'Orient", line: "bus", lineName: "34", type:"corol"},
+    {id: 6, name: "Ste Marie", line: "bus", lineName: "34", type:"corol"}
+  ];
 
   constructor() { }
 
