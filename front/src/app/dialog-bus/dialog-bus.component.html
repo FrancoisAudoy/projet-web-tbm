@@ -1,10 +1,10 @@
 <h1 mat-dialog-title>Ajouter un bus</h1>
 <div mat-dialog-content>
-  Ligne : <mat-select placeholder="Ligne" [(value)]="line">
-    <mat-option *ngFor='let arret of data' value='{{arret.lineName}}' cdkFocusInitial>{{arret.lineName}}</mat-option>
+  Ligne : <mat-select placeholder="Ligne" [(value)]="line" (selectionChange)="lineChange()">
+    <mat-option *ngFor='let line of lineNumber' value='{{line}}' cdkFocusInitial>{{line}}</mat-option>
   </mat-select>
   Arret : <mat-select placeholder="Arret" [(value)]='stop'>
-      <mat-option *ngFor='let arret of data' value='{{arret.name}}'>{{arret.name}}</mat-option>
+      <mat-option *ngFor='let arret of allStopName' value='{{arret}}'>{{arret}}</mat-option>
     </mat-select>
 </div>
 <div mat-dialog-actions>
