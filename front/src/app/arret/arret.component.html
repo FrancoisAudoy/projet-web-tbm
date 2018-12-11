@@ -1,6 +1,7 @@
 <h2>Mes Arrêts</h2>
 <ul class="arrets">
-  <li *ngFor="let arret of ARRETS">
+  <li *ngFor="let arret of SelectedStop">
     <span class="badge">{{arret.lineName}}</span> {{arret.name}}
   </li>
 </ul>
+<button mat-flat-button color="primary" (click)="openDialog()"> + </button>
