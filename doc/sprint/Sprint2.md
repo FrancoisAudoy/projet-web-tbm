@@ -9,7 +9,7 @@
 |4| En tant qu'utilisateur, au moment d'ajouter un arrêt, si cet arrêt est commun à un tram et un bus je souhaite pouvoir choisir soit le tram soit le bus |2|MOYENNE|
 |TOTAL|-----|8|----|
 
-## Tâches 
+## Tâches
 
 | Id | Description | Issue affiliée | Dépendances | Affectation | Statut |
 |:---:|:---:|:---:|:---:|:---:|:---:|
@@ -17,6 +17,16 @@
 |T3d| Créer le composant angular 'trajet' qui s'occupera de gérer les trajets. La page des trajets inclura un bouton '+' permettant l'ajout de trajet en sélectionnant des arrêts, les arrêts des trajets s'affiche sur la même ligne. |3|N/A|  | A FAIRE|
 |T3.1i|Implémenter T3d, la tâche est fini lorsque tout ce qui est décrit est implémenter, et que les arrêts possibles sont récupérer via notre serveur.|3|T3d|  | A FAIRE |
 |T3.2i| Ajouter l'information des horaires temps réels aux trajets, seulement deux horaires temps réel s'afficheront en dessous par arrêt du trajet, les horaires temps réels sont récupérer via l'api rest de open data.|3|T3d, T3.1i|  | A FAIRE|
+|T3.3i| Implementer la partie back permettant de recuperer les trajet d'un utilisateur| 8 |T4d| | A FAIRE |
+|T3.4i| Implementer la partie back permettant de recuperer les horraires en temps réel d'une liste de trajet ou d'un trajet| 8 |T4d| | A FAIRE |
+|T3.5i| Ajouter dans la partie back de pouvoir recuperer les horraires en temps réel et la liste des trajets en meme temps d'un utilisateur| 8 |T4d| | A FAIRE |
 |T4.1i| Implémenter la tâche T4d définit durant le sprint 1, la tâche est fini lorsque les arrêts sont listés et le choix des arrêts possible sont récupérer en utilisant l'API de notre serveur.| 8 | T4d | Antonin | EN COURS |
 |T4.2i| Ajouter aux arrêts les horaires temps réels récupérer en utilisant l'api rest, les horaires apparaîtront à droite des arrêts concerné. La tâches est considérée comme faite lorsque les horaires s'affichent bien à droite de l'arrêt concerné et que les horaires temps réels sont bien récuperer via l'api open data.| 8 |T4d, T4.1i | | A FAIRE |
-| T5.i | Ajouter la possibilité de choisir les horaires d'un arrêt tram ou d'un arrêt bus, si l'arrêt en question est commun au deux type d'arrêt. Ce choix est fait au moment d'ajouter l'arrêt. Cela s'intégre au même endroit que le choix des arrêts. | 4 | T4d, T4.1i |  | A FAIRE |
+|T4.3i| Implementer la partie back permettant de recuperer les arret d'un utilisateur| 8 |T4d| | A FAIRE |
+|T4.4i| Implementer la partie back permettant de recuperer les horraires en temps réel d'une liste d'arret ou d'un arret| 8 |T4d| | A FAIRE |
+|T4.5i| Ajouter dans la partie back de pouvoir recuperer les horraires en temps réel et la liste des arrets en meme temps d'un utilisateur| 8 |T4d| | A FAIRE |
+| T5.i | Ajouter la possibilité de choisir les horaires d'un arrêt tram ou d'un arrêt bus, si l'arrêt en question est commun au deux type d'arrêt. Ce choix est fait au moment d'ajouter l'arrêt. Cela s'intégre au même endroit que le choix des arrêts. | 4 | T5d|  | A FAIRE |
+| T5.2i | Implémenter dans le back la fonction permettant de rajouter un arret à un utilisateur | 4 | T5d |  | A FAIRE |
+|T6.1i| Implémenter dans le back l'inscription d'un utilisateur au service | 1 | T6d | | A FAIRE|
+|T6.2i| Implémenter dans le back la connection d'un utilisateur au service | 1 | T6.1i | | A FAIRE|
+|T6.3i| Implémenter dans le back la deconnection d'un utilisateur au service | 1 | T6.2i | | A FAIRE|
