@@ -27,6 +27,6 @@
 |T4.5i| Ajouter dans la partie back de pouvoir recuperer les horraires en temps réel et la liste des arrets en meme temps d'un utilisateur| 8 |T4d| | A FAIRE |
 | T5.i | Ajouter la possibilité de choisir les horaires d'un arrêt tram ou d'un arrêt bus, si l'arrêt en question est commun au deux type d'arrêt. Ce choix est fait au moment d'ajouter l'arrêt. Cela s'intégre au même endroit que le choix des arrêts. | 4 | T5d|  | A FAIRE |
 | T5.2i | Implémenter dans le back la fonction permettant de rajouter un arret à un utilisateur | 4 | T5d |  | A FAIRE |
-|T6.1i| Implémenter dans le back l'inscription d'un utilisateur au service | 1 | T6d | | A FAIRE|
-|T6.2i| Implémenter dans le back la connection d'un utilisateur au service | 1 | T6.1i | | A FAIRE|
-|T6.3i| Implémenter dans le back la deconnection d'un utilisateur au service | 1 | T6.2i | | A FAIRE|
+|T6.1i| Implémenter dans le back l'inscription d'un utilisateur au service | 1 | T6d | Antonin | DONE |
+|T6.2i| Implémenter dans le back la connection d'un utilisateur au service | 1 | T6.1i | Antonin | DONE |
+|T6.3i| Implémenter dans le back la deconnection d'un utilisateur au service | 1 | T6.2i | Antonin | REJECT |
