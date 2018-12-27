@@ -26,6 +26,7 @@ export class DialogBusComponent implements OnInit {
   }
 
   lineChange(){
+    this.allStopName = [];
     console.log("Change " + this.line);
     let filtredStop = this.allStop.filter(x => parseInt(x.lineName) == this.line);
 

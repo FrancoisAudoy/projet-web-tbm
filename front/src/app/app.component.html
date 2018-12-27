@@ -1,14 +1,20 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-</div>
-<app-arret></app-arret>
-<p>
-  <ngb-alert *ngIf="!closed" (close)="closed=true">
-    <strong>Warning!</strong> Sample alert.
-  </ngb-alert>
-</p>
+<div *ngIf="login.isLoged()">
+  <div style="text-align:center">
+    <h1>
+      Welcome to {{ title }}!
+    </h1>
+  </div>
+  <app-arret></app-arret>
+  <p>
+    <ngb-alert *ngIf="!closed" (close)="closed=true">
+      <strong>Warning!</strong> Sample alert.
+    </ngb-alert>
+  </p>
 
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+</div>
+
+<div *ngIf="!login.isLoged()">
+  <app-login></app-login>
+</div>

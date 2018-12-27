@@ -1,0 +1,59 @@
+<h1>Connexion</h1>
+<div mat-dialog-content>
+
+  <form>
+    <div *ngIf="!creation">
+      <p>
+        <mat-form-field>
+          <input matInput type="email" placeholder="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+          <button mat-button *ngIf="email" matSuffix mat-icon-button aria-label="Clear" (click)="email=''">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input matInput type="password" placeholder="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+          <button mat-button *ngIf="password" matSuffix mat-icon-button aria-label="Clear" (click)="password=''">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </p>
+      <div mat-dialog-actions>
+        <button mat-stroked-button (click)="createAccount()" >Creer un compte</button>
+        <button mat-stroked-button >Connexion</button>
+      </div>
+    </div>
+
+    <div *ngIf="creation">
+      <p>
+        <mat-form-field>
+          <input matInput type="email" placeholder="Email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+          <button mat-button *ngIf="email" matSuffix mat-icon-button aria-label="Clear" (click)="email=''">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input matInput type="text" placeholder="Identifiant" [(ngModel)]="ID" [ngModelOptions]="{standalone: true}">
+          <button mat-button *ngIf="ID" matSuffix mat-icon-button aria-label="Clear" (click)="ID=''">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </p>
+      <p>
+        <mat-form-field>
+          <input matInput type="password" placeholder="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+          <button mat-button *ngIf="password" matSuffix mat-icon-button aria-label="Clear" (click)="password=''">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </mat-form-field>
+      </p>
+      <div mat-dialog-actions>
+        <button mat-stroked-button (click)="connectWithLogin()">J'ai deja un compte</button>
+        <button mat-stroked-button (click)="onCreateAccount()">Creer</button>
+      </div>
+    </div>
+  </form>
+</div>
