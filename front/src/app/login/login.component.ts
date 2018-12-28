@@ -4,7 +4,7 @@
  * Pour créer un compte il est nécessaire d'utiliser tout les champs de la classe idObject
  * pour se connecter il faut utiliser le pseudo et le mot de passe! l'email n'est pas un pseudo
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { QueryService } from '../query.service'
 import { IdObject } from '../IdObject'
 import { LoginService } from '../login.service'
@@ -17,11 +17,12 @@ import { LoginService } from '../login.service'
 
 export class LoginComponent implements OnInit {
 
-  creation: boolean = true;
+  private creation: boolean = true;
 
-  ID: string = "";
-  password: string = "";
-  login: LoginService;
+  private email: string;
+  private pseudo : string;
+  private password : string;
+  private login: LoginService;
   constructor(private query: QueryService, private loginserv: LoginService) { this.login = loginserv; }
 
   createAccount() {
@@ -32,15 +33,15 @@ export class LoginComponent implements OnInit {
     this.creation = false;
   }
 
-  onCreateAccount(mail: string, username: string, password: string) {
-    let user: IdObject = { email: mail, pseudo: username, password: password};
+  onCreateAccount() {
 
+    let user: IdObject = { email: this.email, pseudo: this.pseudo, password: this.password };
     //this.query.postNewUser(user); probleme cors
     this.login.setToken("valide");
   }
 
-  onConnect(pseudo: string, password: string){
-
+  onConnect(pseudo: string, password: string) {
+    let user : IdObject = {email: null, pseudo : this.pseudo, password : this.password};
   }
 
   ngOnInit() {
