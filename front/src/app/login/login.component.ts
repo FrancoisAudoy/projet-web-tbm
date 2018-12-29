@@ -20,8 +20,8 @@ export class LoginComponent implements OnInit {
   private creation: boolean = true;
 
   private email: string;
-  private pseudo : string;
-  private password : string;
+  private pseudo: string;
+  private password: string;
   private login: LoginService;
   constructor(private query: QueryService, private loginserv: LoginService) { this.login = loginserv; }
 
@@ -36,12 +36,16 @@ export class LoginComponent implements OnInit {
   onCreateAccount() {
 
     let user: IdObject = { email: this.email, pseudo: this.pseudo, password: this.password };
-    //this.query.postNewUser(user); probleme cors
-    this.login.setToken("valide");
+    this.query.postNewUser(user).subscribe(resp => {
+     
+        //this.login.setToken("valide");
+      console.log(resp);
+    }); //probleme cors
+
   }
 
   onConnect(pseudo: string, password: string) {
-    let user : IdObject = {email: null, pseudo : this.pseudo, password : this.password};
+    let user: IdObject = { email: null, pseudo: this.pseudo, password: this.password };
   }
 
   ngOnInit() {

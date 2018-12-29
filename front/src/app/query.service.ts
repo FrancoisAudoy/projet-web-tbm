@@ -4,10 +4,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IdObject } from './IdObject';
+import { map } from 'rxjs/operators';
 
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })  
 };
 
 @Injectable({
@@ -19,7 +20,6 @@ export class QueryService {
 
   postNewUser(data: IdObject) {
     console.log("ça part");
-    this.http.post(this.URL + "/user/register?format=json&callback=?", JSON.stringify(data), httpOptions)
-      .subscribe(responseServ => console.log(responseServ));
+    return this.http.post<Object>(this.URL + "/user/register?format=json&callback=?", JSON.stringify(data), httpOptions);
   }
 }

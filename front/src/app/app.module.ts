@@ -11,6 +11,7 @@ import { MatInputModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -38,7 +39,8 @@ import { LoginComponent } from './login/login.component';
     MatInputModule,
     FormsModule,
     MatSelectModule,
-    MatIconModule
+    MatIconModule,
+    MatCardModule
   ],
   providers: [
     {

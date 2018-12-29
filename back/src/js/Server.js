@@ -3,13 +3,14 @@ const bodyParser = require('body-parser');
 const morgan=require('morgan');
 const UserDAO=require('./dao/UserDAO');
 const User=require('./pojo/User');
-
+const cors=require('cors');
 
 const app=express();
 app.listen(3000);
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.use(morgan('dev'));
+app.use(cors());
 
 app.use('/user', require('./ServerUser'));
 

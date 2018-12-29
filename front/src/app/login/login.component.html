@@ -1,59 +1,74 @@
-<h1>Connexion</h1>
-<div mat-dialog-content>
+<mat-card  class="centered-card">
+  <div *ngIf="!creation">
 
-  <form>
-    <div *ngIf="!creation">
-      <p>
+    <mat-card-title>
+      <h1 class="md-headline">Connexion</h1>
+    </mat-card-title>
+    <form>
+      <mat-card-content>
         <mat-form-field>
-          <input matInput type="email" placeholder="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
-          <button mat-button *ngIf="email" matSuffix mat-icon-button aria-label="Clear" (click)="email=''">
+          <input matInput type="text" placeholder="pseudo" [(ngModel)]="pseudo" [ngModelOptions]="{standalone: true}">
+          <button mat-button *ngIf="pseudo" matSuffix mat-icon-button aria-label="Clear" (click)="pseudo=''">
             <mat-icon>clear</mat-icon>
           </button>
         </mat-form-field>
-      </p>
-      <p>
+      </mat-card-content>
+
+      <mat-card-content>
         <mat-form-field>
           <input matInput type="password" placeholder="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
           <button mat-button *ngIf="password" matSuffix mat-icon-button aria-label="Clear" (click)="password=''">
             <mat-icon>clear</mat-icon>
           </button>
         </mat-form-field>
-      </p>
-      <div mat-dialog-actions>
-        <button mat-stroked-button (click)="createAccount()" >Creer un compte</button>
-        <button mat-stroked-button >Connexion</button>
-      </div>
-    </div>
+      </mat-card-content>
 
-    <div *ngIf="creation">
-      <p>
+      <mat-card-actions>
+        <button mat-stroked-button (click)="createAccount()">Creer un compte</button>
+        <button mat-stroked-button (click)="onConnect()">Connexion</button>
+      </mat-card-actions>
+    </form>
+
+  </div>
+
+  <div *ngIf="creation">
+
+    <mat-card-title>
+      <h1 class="md-headline">Inscription</h1>
+    </mat-card-title>
+
+    <form>
+      <mat-card-content>
         <mat-form-field>
           <input matInput type="email" placeholder="Email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
           <button mat-button *ngIf="email" matSuffix mat-icon-button aria-label="Clear" (click)="email=''">
             <mat-icon>clear</mat-icon>
           </button>
         </mat-form-field>
-      </p>
-      <p>
+      </mat-card-content>
+      <mat-card-content>
         <mat-form-field>
-          <input matInput type="text" placeholder="Identifiant" [(ngModel)]="ID" [ngModelOptions]="{standalone: true}">
-          <button mat-button *ngIf="ID" matSuffix mat-icon-button aria-label="Clear" (click)="ID=''">
+          <input matInput type="text" placeholder="Pseudonyme" [(ngModel)]="pseudo" [ngModelOptions]="{standalone: true}">
+          <button mat-button *ngIf="pseudo" matSuffix mat-icon-button aria-label="Clear" (click)="pseudo=''">
             <mat-icon>clear</mat-icon>
           </button>
         </mat-form-field>
-      </p>
-      <p>
+      </mat-card-content>
+      <mat-card-content>
         <mat-form-field>
           <input matInput type="password" placeholder="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
           <button mat-button *ngIf="password" matSuffix mat-icon-button aria-label="Clear" (click)="password=''">
             <mat-icon>clear</mat-icon>
           </button>
         </mat-form-field>
-      </p>
-      <div mat-dialog-actions>
-        <button mat-stroked-button (click)="connectWithLogin()">J'ai deja un compte</button>
-        <button mat-stroked-button (click)="onCreateAccount()">Creer</button>
-      </div>
-    </div>
-  </form>
-</div>
+      </mat-card-content>
+      <mat-card-actions>
+        <div mat-dialog-actions>
+          <button mat-stroked-button (click)="connectWithLogin()">J'ai deja un compte</button>
+          <button mat-stroked-button (click)="onCreateAccount()">Creer</button>
+        </div>
+      </mat-card-actions>
+    </form>
+
+  </div>
+</mat-card>
