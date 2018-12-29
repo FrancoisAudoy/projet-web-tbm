@@ -4,12 +4,12 @@
  * Pour créer un compte il est nécessaire d'utiliser tout les champs de la classe UserObject
  * pour se connecter il faut utiliser le pseudo et le mot de passe! l'email n'est pas un pseudo
  */
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { QueryService } from '../query.service';
 import { LoginService } from '../login.service';
 import { Config } from 'protractor';
-import { UserObject } from '../UserObject';
+import { UserObject, QueryUserObject } from '../UserObject';
 
 @Component({
   selector: 'app-login',
@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   private email: string;
   private pseudo: string;
   private password: string;
+
   constructor(private query: QueryService, private loginService: LoginService,
     private snackBar: MatSnackBar) { }
 
@@ -49,9 +50,12 @@ export class LoginComponent implements OnInit {
 
     let user: UserObject = { email: this.email, pseudo: this.pseudo, password: this.password };
     this.query.postNewUser(user).subscribe(((resp: Config) => {
-      if (resp.success == true)
+      if (resp.success == true) {
         this.loginService.setToken(resp.token);
-        this.loginService.setUser(user);
+        let queryUser : QueryUserObject = JSON.parse(resp.message);
+        this.loginService.setUser(queryUser);
+        this.loginService.writeLogin();
+      }
     }),
       (error => {
         this.openSnackBar(error.message);
@@ -64,9 +68,12 @@ export class LoginComponent implements OnInit {
   onConnect(pseudo: string, password: string) {
     let user: UserObject = { email: this.email, pseudo: this.pseudo, password: this.password };
     this.query.postConnectUser(user).subscribe(((resp: Config) => {
-      if (resp.success == true)
+      if (resp.success == true) {
         this.loginService.setToken(resp.token);
-        this.loginService.setUser(user);
+        let queryUser : QueryUserObject = JSON.parse(resp.message);
+        this.loginService.setUser(queryUser);
+        this.loginService.writeLogin();
+      }
     }),
       (error => {
         this.openSnackBar(error.message);
@@ -75,7 +82,6 @@ export class LoginComponent implements OnInit {
       ));
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

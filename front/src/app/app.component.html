@@ -2,15 +2,16 @@
 <div *ngIf="login.isLoged()">
   <div style="text-align:center">
     <h1>
-      Welcome to {{ title }}!
+      Welcome to {{ this.login.getUser().pseudo }}!
     </h1>
   </div>
+  <button mat-stroked-button (click)="disconnect()">Deconnection</button>
   <app-arret></app-arret>
-  <p>
+  <!--<p>
     <ngb-alert *ngIf="!closed" (close)="closed=true">
       <strong>Warning!</strong> Sample alert.
     </ngb-alert>
-  </p>
+  </p>-->
 
   <router-outlet></router-outlet>
 </div>

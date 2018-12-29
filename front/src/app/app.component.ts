@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from './login.service'
+import { UserObject, QueryUserObject } from './UserObject';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,16 @@ import { LoginService } from './login.service'
 })
 export class AppComponent {
   title = 'front';
-  login: LoginService;
-  constructor(private loginserv: LoginService) { this.login = loginserv; }
+  user: QueryUserObject;
+
+  constructor(private login: LoginService) {
+    this.login.checkIfAlreadyConnect();
+    this.user = this.login.getUser();
+    console.log(this.user);
+  }
+
+  disconnect(){
+    this.login.disconnect();
+  }
 
 }
