@@ -3,7 +3,7 @@
  */
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { IdObject } from './IdObject';
+import { UserObject } from './UserObject';
 import { map } from 'rxjs/operators';
 
 
@@ -18,8 +18,13 @@ export class QueryService {
   URL = "http://localhost:3000";
   constructor(private http: HttpClient) { }
 
-  postNewUser(data: IdObject) {
+  postNewUser(data: UserObject) {
     console.log("ça part");
-    return this.http.post<Object>(this.URL + "/user/register?format=json&callback=?", JSON.stringify(data), httpOptions);
+    return this.http.post(this.URL + "/user/register?format=json&callback=?", JSON.stringify(data), httpOptions);
+  }
+
+  postConnectUser(user : UserObject){
+    console.log("ça part");
+    return this.http.post(this.URL + "/user/login?format=json&callback=?", JSON.stringify(user), httpOptions);
   }
 }

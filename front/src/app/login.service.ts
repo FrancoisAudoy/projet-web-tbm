@@ -3,23 +3,30 @@
  */
 
 import { Injectable } from '@angular/core';
+import { UserObject } from './UserObject';
+import { timingSafeEqual } from 'crypto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  loged : boolean = false;
-  token : string = "";
+  private loged: boolean = false;
+  private token: string = "";
+  private user: UserObject = null;
 
   constructor() { }
 
-  setToken(newToken : string){
+  setToken(newToken: string) {
     this.token = newToken;
     this.loged = true;
   }
 
-  isLoged(){
+  setUser(user: UserObject) {
+    this.user = user;
+  }
+
+  isLoged() {
     return this.loged;
   }
 }
