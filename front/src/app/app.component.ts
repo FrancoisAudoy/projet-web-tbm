@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginService } from './login.service'
-import { UserObject, QueryUserObject } from './UserObject';
+import { QueryUserObject } from './UserObject';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent {
     console.log(this.user);
   }
 
-  disconnect(){
+  disconnect() {
     this.login.disconnect();
   }
 

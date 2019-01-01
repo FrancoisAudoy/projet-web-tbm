@@ -3,9 +3,10 @@
   <div style="text-align:center">
     <h1>
       Welcome to {{ this.login.getUser().pseudo }}!
+      <button mat-stroked-button (click)="disconnect()">Deconnection</button>
     </h1>
   </div>
-  <button mat-stroked-button (click)="disconnect()">Deconnection</button>
+  
   <app-arret></app-arret>
   <!--<p>
     <ngb-alert *ngIf="!closed" (close)="closed=true">

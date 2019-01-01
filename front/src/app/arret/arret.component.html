@@ -1,7 +1,18 @@
-<h2>Mes Arrêts</h2>
-<ul class="arrets">
-  <li *ngFor="let arret of SelectedStop">
-    <span class="badge">{{arret.lineName}}</span> {{arret.name}}
-  </li>
-</ul>
-<button mat-flat-button color="primary" (click)="openDialog()"> + </button>
+<mat-card class='arrets'>
+  <mat-card-title>
+    <h2>Mes Arrêts</h2>
+  </mat-card-title>
+
+  <mat-card-actions>
+    <button mat-flat-button color="primary" (click)="openDialog()"> + </button>
+  </mat-card-actions>
+
+  <mat-card-content class="arret">
+    <ul>
+      <li *ngFor="let arret of SelectedStop">
+        <span class="badge">{{arret.lineName}}</span> {{arret.name}}
+      </li>
+    </ul>
+  </mat-card-content>
+
+</mat-card>

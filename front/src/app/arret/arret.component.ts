@@ -18,8 +18,8 @@ export class ArretComponent implements OnInit {
     { id: 4, name: "Lycée Pape Clément", line: "bus", lineName: "34", type: "corol" },
     { id: 5, name: "Pont de l'Orient", line: "bus", lineName: "34", type: "corol" },
     { id: 6, name: "Ste Marie", line: "bus", lineName: "34", type: "corol" },
-    { id: 7, name: "A&m", line: "bus", lineName: "8", type: "liane" },
-    { id: 8, name: "Piscine", line: "bus", lineName: "8", type: "liane" }
+    { id: 7, name: "arts et métier", line: "bus", lineName: "8", type: "liane" },
+    { id: 8, name: "Piscine de thouars", line: "bus", lineName: "8", type: "liane" }
   ];
 
   SelectedStop: Arret[] = [];
