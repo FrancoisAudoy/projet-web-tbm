@@ -6,6 +6,8 @@
  */
 import { Component, OnInit, NgModule } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material';
 import { QueryService } from '../query.service';
 import { LoginService } from '../login.service';
 import { Config } from 'protractor';
@@ -26,7 +28,9 @@ export class LoginComponent implements OnInit {
   private password: string;
 
   constructor(private query: QueryService, private loginService: LoginService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar, private iconRegister: MatIconRegistry, sanitizer: DomSanitizer) {
+   // this.iconRegister.addSvgIcon("cross", sanitizer.bypassSecurityTrustResourceUrl("../assets/icons/icon-cross.svg"));
+  }
 
   createAccount() {
     this.creation = true;
@@ -52,7 +56,7 @@ export class LoginComponent implements OnInit {
     this.query.postNewUser(user).subscribe(((resp: Config) => {
       if (resp.success == true) {
         this.loginService.setToken(resp.token);
-        let queryUser : QueryUserObject = JSON.parse(resp.message);
+        let queryUser: QueryUserObject = JSON.parse(resp.message);
         this.loginService.setUser(queryUser);
         this.loginService.writeLogin();
       }
@@ -70,7 +74,7 @@ export class LoginComponent implements OnInit {
     this.query.postConnectUser(user).subscribe(((resp: Config) => {
       if (resp.success == true) {
         this.loginService.setToken(resp.token);
-        let queryUser : QueryUserObject = JSON.parse(resp.message);
+        let queryUser: QueryUserObject = JSON.parse(resp.message);
         this.loginService.setUser(queryUser);
         this.loginService.writeLogin();
       }

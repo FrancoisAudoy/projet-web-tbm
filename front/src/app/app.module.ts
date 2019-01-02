@@ -20,13 +20,15 @@ import { AppComponent } from './app.component';
 import { ArretComponent } from './arret/arret.component';
 import { DialogBusComponent } from './dialog-bus/dialog-bus.component';
 import { LoginComponent } from './login/login.component';
+import { TrajetsComponent } from './trajets/trajets.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArretComponent,
     DialogBusComponent,
-    LoginComponent
+    LoginComponent,
+    TrajetsComponent
   ],
   entryComponents: [DialogBusComponent],
   imports: [

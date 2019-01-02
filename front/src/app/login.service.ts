@@ -43,8 +43,13 @@ export class LoginService {
     this.loged = false;
   }
 
+  deleteCookie() {
+    this.cookieService.delete(this.cookieName);
+  }
+
   disconnect() {
-    this.invalidToken()
+    this.invalidToken();
+    this.deleteCookie();
     this.user = null;
   }
 
