@@ -28,8 +28,7 @@ export class LoginComponent implements OnInit {
   private password: string;
 
   constructor(private query: QueryService, private loginService: LoginService,
-    private snackBar: MatSnackBar, private iconRegister: MatIconRegistry, sanitizer: DomSanitizer) {
-   // this.iconRegister.addSvgIcon("cross", sanitizer.bypassSecurityTrustResourceUrl("../assets/icons/icon-cross.svg"));
+    private snackBar: MatSnackBar) {
   }
 
   createAccount() {

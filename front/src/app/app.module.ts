@@ -42,7 +42,7 @@ import { TrajetsComponent } from './trajets/trajets.component';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    MatSelectModule,
+    MatSelectModule, 
     MatIconModule,
     MatCardModule,
     MatSnackBarModule

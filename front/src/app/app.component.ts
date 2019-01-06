@@ -11,13 +11,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class AppComponent {
   title = 'front';
-  user: QueryUserObject;
 
   constructor(private login: LoginService, private iconRegister: MatIconRegistry, sanitizer: DomSanitizer) {
-    this.iconRegister.addSvgIcon("cross", sanitizer.bypassSecurityTrustResourceUrl("  assets/icons/icon-cross.svg"));
+    this.iconRegister.addSvgIcon("cross", sanitizer.bypassSecurityTrustResourceUrl("assets/icons/icon-cross.svg"));
+
     this.login.checkIfAlreadyConnect();
-    this.user = this.login.getUser();
-    console.log(this.user);
   }
 
   disconnect() {

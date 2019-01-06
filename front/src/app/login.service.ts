@@ -3,7 +3,7 @@
  */
 
 import { Injectable, OnInit } from '@angular/core';
-import { UserObject, QueryUserObject } from './UserObject';
+import { QueryUserObject } from './UserObject';
 import { CookieService } from 'ngx-cookie-service';
 
 

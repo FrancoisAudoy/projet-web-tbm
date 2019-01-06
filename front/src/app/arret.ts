@@ -4,4 +4,8 @@ export class Arret {
   line: string; //bus, tram, vcub
   lineName: string; //34, A, ...
   type: string; // corol, ...
+};
+
+export class Trajet{
+  liste: Arret[];
 }

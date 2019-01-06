@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-
 import { Arret } from '../arret';
-import { BehaviorSubject } from 'rxjs';
 import { DialogBusComponent } from '../dialog-bus/dialog-bus.component';
 
 @Component({
@@ -11,7 +9,7 @@ import { DialogBusComponent } from '../dialog-bus/dialog-bus.component';
   styleUrls: ['./arret.component.css']
 })
 export class ArretComponent implements OnInit {
-  ARRETS: Arret[] = [
+  ARRETS: any[] = [
     { id: 1, name: "Chemin Bon Air", line: "bus", lineName: "34", type: "corol" },
     { id: 2, name: "Stade Cruchon", line: "bus", lineName: "34", type: "corol" },
     { id: 3, name: "Les Menhirs", line: "bus", lineName: "34", type: "corol" },
@@ -24,7 +22,8 @@ export class ArretComponent implements OnInit {
 
   SelectedStop: Arret[] = [];
 
-  constructor(public dialRef: MatDialog) { }
+  constructor(public dialRef: MatDialog,) {
+  }
 
   ngOnInit() {
   }
