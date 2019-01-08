@@ -3,11 +3,11 @@ const Paths = require('../pojo/Paths');
 const config=require('../Config');
 
 let client;
-module.exports= class PathDAO{
+module.exports= class PathsDAO{
   async connect(){
     client=await MongoClient.connect(config.url, config.urlArg);
     let db=await client.db(config.database);
-    let col=await db.collection(config.pathCollection);
+    let col=await db.collection(config.pathsCollection);
     return col;
   }
 

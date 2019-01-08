@@ -10,8 +10,9 @@ module.exports ={
   urlArg: { useNewUrlParser: true },
   database: 'projet-web-tbm',
   userCollection: 'users',
-  stopCollection: 'stops',
-  pathCollection: 'paths',
+  stopsCollection: 'stops',
+  stopCollection: 'stop',
+  pathsCollection: 'paths',
   secret: 'oiah4GFSBNXUohd562729jhdceedbiPDSZJZOKJ4gre64rtgejhyrTRHRTgt484erERGRjkztqr',
   hash: hash
 };

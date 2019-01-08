@@ -19,8 +19,10 @@ class Paths{
   addPath(path){
     let ind=-1;
     this._paths.forEach(function(item, i, array){
+      console.log(item);
       item.forEach(function(p, j){
-        if(p===path[j] && j===array.length-1 && j===path.length-1){
+        console.log("p "+p+", path[j] "+path[j]+", j "+j);
+        if(p===path[j] && j===item.length-1 && j===path.length-1){
           ind=i;
         }
       })
@@ -34,7 +36,7 @@ class Paths{
     let ind=-1;
     this._paths.forEach(function(item, i, array){
       item.forEach(function(p, j){
-        if(p===path[j] && j===array.length-1 && j===path.length-1){
+        if(p===path[j] && j===item.length-1 && j===path.length-1){
           ind=i;
         }
       })

@@ -2,11 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan=require('morgan');
 const jwt    = require('jsonwebtoken');
-const UserDAO=require('./dao/UserDAO');
-const User=require('./pojo/User');
 const cors=require('cors');
 const config=require('./Config');
-
 const app=express();
 app.listen(3000);
 app.use(bodyParser.urlencoded({extended: false}));

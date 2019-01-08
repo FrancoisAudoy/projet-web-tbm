@@ -1,5 +1,5 @@
 const MongoClient=require('mongodb');
-const Stops = require('../pojo/Stops');
+const Stop = require('../pojo/Stop');
 const config=require('../Config');
 
 let client;
@@ -11,27 +11,25 @@ module.exports= class StopDAO{
     return col;
   }
 
-  async save(stops){
+  async save(stop){
     let col=await this.connect();
-    let inBase=await col.findOne({"_user":stops.user});
-    let stop=null;
+    let inBase=await col.findOne({"_id":stop.id});
+    let stop2=null;
     if(inBase==null){
-      await col.insertOne(stops);
-    }else{
-      await col.updateOne(inBase, {$set : stops});
+      await col.insertOne(stop);
     }
-    let tmp=await col.findOne(stops);
-    stop=new Stops(tmp._user, tmp._stops);
+    let tmp=await col.findOne({"_id":stop.id});
+    stop2=new Stop(tmp._id, tmp._name, tmp._direction);
     client.close();
-    return stop;
+    return stop2;
   }
 
-  async find(user){
+  async find(id){
     let col=await this.connect();
-    let inBase=await col.findOne({"_user":user.id});
+    let inBase=await col.findOne({"_id":id});
     let stop=null;
     if(inBase!=null){
-      stop=new Stops(inBase._user, inBase._stops);
+      stop=new Stop(inBase._id, inBase._name, inBase._direction);
     }
     client.close();
     return stop;
