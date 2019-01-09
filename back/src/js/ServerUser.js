@@ -18,7 +18,6 @@ router.post('/register', async function(req, res){
     let token=jwt.sign(playload, config.secret, {expiresIn: 86400});
     res.status(200).json({
 					success: true,
-					message: JSON.stringify(playload),
 					token: token
 				});
   }else{
@@ -40,7 +39,6 @@ router.post('/login', async function(req, res){
     let token=jwt.sign(playload, config.secret, {expiresIn: 86400});
     res.status(200).json({
 					success: true,
-					message: JSON.stringify(playload),
 					token: token
 				});
   }else{
