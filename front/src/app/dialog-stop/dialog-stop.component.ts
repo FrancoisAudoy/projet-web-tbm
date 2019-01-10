@@ -11,9 +11,11 @@ import { Stop } from '../arret';
 export class DialogStopComponent implements OnInit {
   private line: number;
   private stop: string;
+  private direction: string;
   private lineNumber: number[] = [];
   private allStopName: string[] = [];
   private allStop: Stop [] = [];
+  private allDirections: string[] = ["Aller", "Retour"];
  
 
   constructor(public dialRef: MatDialogRef<DialogStopComponent>,
