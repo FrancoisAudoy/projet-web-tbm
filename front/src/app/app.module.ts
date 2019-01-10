@@ -17,20 +17,20 @@ import { CookieService } from 'ngx-cookie-service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ArretComponent } from './arret/arret.component';
-import { DialogBusComponent } from './dialog-bus/dialog-bus.component';
+import { StopComponent } from './stop/stop.component';
+import { DialogStopComponent } from './dialog-stop/dialog-stop.component';
 import { LoginComponent } from './login/login.component';
 import { TrajetsComponent } from './trajets/trajets.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ArretComponent,
-    DialogBusComponent,
+    StopComponent,
+    DialogStopComponent,
     LoginComponent,
     TrajetsComponent
   ],
-  entryComponents: [DialogBusComponent],
+  entryComponents: [DialogStopComponent],
   imports: [
     NgbModule.forRoot(),
     BrowserModule,

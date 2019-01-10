@@ -2,15 +2,15 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-import { ArretComponent } from './arret.component';
+import { StopComponent } from './stop.component';
 
-describe('ArretComponent', () => {
-  let component: ArretComponent;
-  let fixture: ComponentFixture<ArretComponent>;
+describe('StopComponent', () => {
+  let component: StopComponent;
+  let fixture: ComponentFixture<StopComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ArretComponent],
+      declarations: [StopComponent],
       imports: [MatDialogModule],
       schemas:[CUSTOM_ELEMENTS_SCHEMA]
     })
@@ -18,7 +18,7 @@ describe('ArretComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ArretComponent);
+    fixture = TestBed.createComponent(StopComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

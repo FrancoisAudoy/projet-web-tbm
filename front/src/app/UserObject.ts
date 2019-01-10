@@ -10,6 +10,6 @@ export class UserObject {
 export class QueryUserObject{
     email: string;
     pseudo: string;
-    id: string;
+   // id: string;
     token: string;
 };

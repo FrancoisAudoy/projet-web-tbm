@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { LoginService } from './login.service'
-import { QueryUserObject } from './UserObject';
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 

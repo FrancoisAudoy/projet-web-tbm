@@ -3,10 +3,8 @@
  */
 
 import { Injectable, OnInit } from '@angular/core';
-import { QueryUserObject } from './UserObject';
+import { QueryUserObject, UserObject } from './UserObject';
 import { CookieService } from 'ngx-cookie-service';
-
-
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +28,8 @@ export class LoginService {
     return this.token;
   }
 
-  setUser(user: QueryUserObject) {
-    this.user = user;
+  setUser(user: UserObject) {
+    this.user = {email : user.email, pseudo: user.pseudo, token: this.token};
   }
 
   isLoged() {
@@ -61,7 +59,7 @@ export class LoginService {
     let toWrite: QueryUserObject = {
       email: this.user.email,
       pseudo: this.user.pseudo,
-      id: "",
+      //id: "",
       token: this.token
     }
 
@@ -72,7 +70,7 @@ export class LoginService {
     if (this.cookieService.check(this.cookieName)) {
       let cookie: string = this.cookieService.get(this.cookieName);
       let cookieParsed: QueryUserObject = JSON.parse(cookie);
-      this.setUser(cookieParsed);
+      this.user = cookieParsed;
       this.setToken(cookieParsed.token);
     }
   }
