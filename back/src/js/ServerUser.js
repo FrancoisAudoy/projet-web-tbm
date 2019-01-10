@@ -18,7 +18,8 @@ router.post('/register', async function(req, res){
     let token=jwt.sign(playload, config.secret, {expiresIn: 86400});
     res.status(200).json({
 					success: true,
-					token: token
+          token: token,
+          message: JSON.stringify(playload)
 				});
   }else{
     res.status(401).json({ success: false, message: 'User already exist !' });
@@ -39,7 +40,8 @@ router.post('/login', async function(req, res){
     let token=jwt.sign(playload, config.secret, {expiresIn: 86400});
     res.status(200).json({
 					success: true,
-					token: token
+          token: token,
+          message: JSON.stringify(playload)
 				});
   }else{
     res.status(401).json({ success: false, message: 'Authentification failed !' });

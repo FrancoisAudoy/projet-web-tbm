@@ -9,12 +9,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { QueryService } from '../query.service';
 import { LoginService } from '../login.service';
 import { Config } from 'protractor';
-import { UserObject } from '../UserObject';
+import { UserObject, QueryUserObject } from '../UserObject';
+import { Md5 } from '../../../node_modules/ts-md5/dist/md5';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [Md5]
 })
 
 export class LoginComponent implements OnInit {
@@ -23,10 +25,10 @@ export class LoginComponent implements OnInit {
   private email: string;
   private pseudo: string;
   private password: string;
-  private creation: boolean = true; 
+  private creation: boolean = true;
 
   constructor(private query: QueryService, private loginService: LoginService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar, private md5: Md5) {
   }
 
   createAccount() {
@@ -49,11 +51,11 @@ export class LoginComponent implements OnInit {
 
   onCreateAccount() {
 
-    let user: UserObject = { email: this.email, pseudo: this.pseudo, password: this.password };
+    let user: UserObject = { email: this.email, pseudo: this.pseudo, password: Md5.hashStr(this.password).toString() };
     this.query.postNewUser(user).subscribe(((resp: Config) => {
       if (resp.success == true) {
         this.loginService.setToken(resp.token);
-        //let queryUser: QueryUserObject = JSON.parse(resp.message);
+        let messparsed = JSON.parse(resp.message);
         this.loginService.setUser(user);
         this.loginService.writeLogin();
       }
@@ -67,11 +69,11 @@ export class LoginComponent implements OnInit {
   }
 
   onConnect() {
-    let user: UserObject = { email: this.email, pseudo: this.pseudo, password: this.password };
+    let user: UserObject = { email: this.email, pseudo: this.pseudo, password: Md5.hashStr(this.password).toString() };
     this.query.postConnectUser(user).subscribe(((resp: Config) => {
       if (resp.success == true) {
         this.loginService.setToken(resp.token);
-        //let queryUser: QueryUserObject = JSON.parse(user);
+        user.pseudo = JSON.parse(resp.message).pseudo;
         this.loginService.setUser(user);
         this.loginService.writeLogin();
       }

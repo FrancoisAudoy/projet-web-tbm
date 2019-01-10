@@ -22,7 +22,6 @@ export class QueryService {
   }
 
   postNewUser(data: UserObject) {
-    console.log("ça part");
     return this.http.post(this.URL + "/user/register?format=json&callback=?", JSON.stringify(data), httpOptions);
   }
 
