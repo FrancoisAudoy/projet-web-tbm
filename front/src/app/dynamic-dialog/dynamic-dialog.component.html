@@ -1,0 +1,20 @@
+
+  <div *ngFor="let it of formIt" class="form">
+    <div mat-dialog-content>
+      Ligne : <mat-select placeholder='Ligne' [(value)]="selectedLine[it]" (selectionChange)="onLineChange(it)">
+        <mat-option *ngFor="let line of allLineName" value='{{line}}' cdkFocusInitial>{{line}}</mat-option>
+      </mat-select>
+      Arret : <mat-select placeholder="Arret" [(value)]='selectedStop[it]'>
+        <mat-option *ngFor='let arret of possibleStop[it].stops' value='{{arret}}'>{{arret}}</mat-option>
+      </mat-select>
+      Direction : <mat-select placeholder="Direction" [(value)]='selectedDirection[it]'>
+        <mat-option *ngFor='let dir of directionPossible' value='{{dir}}'>{{dir}}</mat-option>
+      </mat-select>
+    </div>
+  </div>
+  <button mat-flat-button color="primary" (click)="addForm()"> + </button>
+
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Annuler</button>
+  <button mat-button [mat-dialog-close]='{lineName:selectedLine, name:selectedStop, direction:selectedDirection, size: nbForm}'>Ok</button>
+</div>

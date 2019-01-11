@@ -21,17 +21,7 @@ export class StopComponent implements OnInit {
   URL: string = 'https://data.bordeaux-metropole.fr/csv?key=369BEIMSVY';
   constructor(public dialRef: MatDialog, private scriptService: ScriptService,
     private query: QueryService, private login: LoginService,
-    private snackBar: MatSnackBar) {
-    /*this.scriptService.load('ApiCUB', 'Jquery').then(data => {
-      CUB.ready(function () {
-        CUB.init('zone-carte');
-        CUB.disable();
-        let transport = new CUB.Layer.Processing('Temps Reel', URL, { process: 'SV_CHEM_A' });
-        console.log("CUB is ready");
-      });
-
-    });*/
-  }
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.query.getAllStopFor(this.login.getUser()).subscribe(((resp: Config) => {
@@ -54,29 +44,28 @@ export class StopComponent implements OnInit {
   }
 
   openDialog() {
-    console.log("toto");
     const diagRef = this.dialRef.open(DialogStopComponent, {
       width: '250px',
       data: Stops
     });
 
     diagRef.afterClosed().subscribe((arret) => {
-      console.log(arret);
-      if (arret.lineName != undefined && arret.name != undefined && arret.direction != undefined) {
-        let _stop = Stops.find(stop => stop.name === arret.name &&
-          stop.lineName === arret.lineName && stop.direction == arret.direction.toLowerCase());
+      if (arret != undefined)
+        if (arret.lineName != undefined && arret.name != undefined && arret.direction != undefined) {
+          let _stop = Stops.find(stop => stop.name === arret.name &&
+            stop.lineName === arret.lineName && stop.direction == arret.direction.toLowerCase());
 
-        this.query.putAddArret(this.login.getUser(), _stop).subscribe(((resp: Config) => {
-          console.log(resp);
-          if (resp != undefined && _stop != undefined)
-            this.SelectedStop.push(_stop);
-        }), (error => {
-          this.openSnackBar(error.message);
-          console.log(error.message);
-        }));
+          this.query.putAddArret(this.login.getUser(), _stop).subscribe(((resp: Config) => {
+            console.log(resp);
+            if (resp != undefined && _stop != undefined)
+              this.SelectedStop.push(_stop);
+          }), (error => {
+            this.openSnackBar(error.message);
+            console.log(error.message);
+          }));
 
 
-      }
+        }
     });
   }
 }
