@@ -44,5 +44,5 @@ app.use(function(req, res, next) {
   }
 });
 
-app.use('/stops', require('./ServerStops'));
-app.use('/paths', require('./ServerPaths'));
+app.use('/user/:id/stops', require('./ServerStops'));
+app.use('/user/:id/paths', require('./ServerPaths'));

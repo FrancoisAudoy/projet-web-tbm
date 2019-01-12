@@ -19,7 +19,6 @@ module.exports=class StopUtils{
 
   async getStop(id){
     let stop=await this._stopDao.find(id);
-    console.log(stop+" on "+id);
     return stop;
   }
 
