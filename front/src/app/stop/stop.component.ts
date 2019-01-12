@@ -7,6 +7,7 @@ import { ScriptService } from '../script-service.service';
 import { QueryService } from '../query.service';
 import { LoginService } from '../login.service';
 import { Config } from 'protractor';
+import { PersonalSnackBarService } from '../personal-snack-bar.service';
 
 declare var CUB: any;
 
@@ -21,11 +22,10 @@ export class StopComponent implements OnInit {
   URL: string = 'https://data.bordeaux-metropole.fr/csv?key=369BEIMSVY';
   constructor(public dialRef: MatDialog, private scriptService: ScriptService,
     private query: QueryService, private login: LoginService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: PersonalSnackBarService) { }
 
   ngOnInit() {
     this.query.getAllStopFor(this.login.getUser()).subscribe(((resp: Config) => {
-      console.log(resp);
       resp.forEach(element => {
         let _stop = Stops.find(stop => stop.name == element._name && stop.id == element._id);
         if (_stop != undefined)
@@ -34,14 +34,11 @@ export class StopComponent implements OnInit {
 
     }),
       (error => {
-        this.openSnackBar(error.message);
+        this.snackBar.openSnackBar(error.message);
         console.log(error.message);
       }));
   }
 
-  openSnackBar(message: string) {
-    this.snackBar.open(message, '', { duration: 1000 });
-  }
 
   openDialog() {
     const diagRef = this.dialRef.open(DialogStopComponent, {
@@ -60,7 +57,7 @@ export class StopComponent implements OnInit {
             if (resp != undefined && _stop != undefined)
               this.SelectedStop.push(_stop);
           }), (error => {
-            this.openSnackBar(error.message);
+            this.snackBar.openSnackBar(error.message);
             console.log(error.message);
           }));
 

@@ -4,7 +4,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { UserObject, QueryUserObject } from './UserObject';
-import { Stop } from './arret';
+import { Stop, Trip } from './arret';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -39,4 +39,16 @@ export class QueryService {
     let param = new HttpParams().set("token", user.token);
     return this.http.get(this.URL + "/user/" + user.id +"/stops", { headers: httpOptions.headers, params: param});
   }
+
+  putAddTripOf(user: QueryUserObject, trip: Trip){
+    let dataToSend = { token: user.token, path: trip.liste };
+    return this.http.put(this.URL + "/user/" + user.id +"/paths?format=json&callback=?", JSON.stringify(dataToSend), httpOptions);
+  }
+
+  getAllTripOf(user: QueryUserObject){
+    let param = new HttpParams().set("token", user.token);
+    return this.http.get(this.URL + "/user/" + user.id +"/paths", { headers: httpOptions.headers, params: param});
+  }
+
+
 }
