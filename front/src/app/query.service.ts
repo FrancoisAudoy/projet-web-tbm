@@ -29,14 +29,14 @@ export class QueryService {
   }
 
   putAddArret(user: QueryUserObject, stop: Stop) {
-    let dataToSend = { token: user.token, stop: { id: stop.id, name: stop.name, direction: "aller" } };
-    return this.http.put(this.URL + "/stops?format=json&callback=?", JSON.stringify(dataToSend), httpOptions);
+    let dataToSend = { token: user.token, stop: { id: stop.id, name: stop.name, direction: stop.direction } };
+    return this.http.put(this.URL + "/user/" + user.id +"/stops?format=json&callback=?", JSON.stringify(dataToSend), httpOptions);
   }
 
   getAllStopFor(user: QueryUserObject) {
     //let token = { token: user.token };
 
     let param = new HttpParams().set("token", user.token);
-    return this.http.get(this.URL + "/stops", { headers: httpOptions.headers, params: param});
+    return this.http.get(this.URL + "/user/" + user.id +"/stops", { headers: httpOptions.headers, params: param});
   }
 }

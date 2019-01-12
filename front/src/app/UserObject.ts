@@ -7,9 +7,9 @@ export class UserObject {
     password: string;
 };
 
-export class QueryUserObject{
+export class QueryUserObject {
     email: string;
     pseudo: string;
-   // id: string;
+    id: string;
     token: string;
 };

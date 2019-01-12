@@ -10,28 +10,9 @@ import { DynamicDialogComponent } from '../dynamic-dialog/dynamic-dialog.compone
 })
 export class TrajetsComponent implements OnInit {
 
-  private line: Trip[];
+  private line: Trip[] = [];
 
-  constructor(private dialog: MatDialog) {
-    this.line = [
-      {
-        liste: [
-          { id: 1, name: "Chemin Bon Air", line: "bus", lineName: "34", direction: "aller" },
-          { id: 2, name: "Stade Cruchon", line: "bus", lineName: "34", direction: "aller" },
-          { id: 3, name: "Les Menhirs", line: "bus", lineName: "34", direction: "aller" }
-        ]
-      },
-      {
-        liste: [
-          { id: 4, name: "Lycée Pape Clément", line: "bus", lineName: "34", direction: "aller" },
-          { id: 5, name: "Pont de l'Orient", line: "bus", lineName: "34", direction: "aller" },
-          { id: 6, name: "Ste Marie", line: "bus", lineName: "34", direction: "aller" },
-          { id: 7, name: "arts et métier", line: "bus", lineName: "8", direction: "aller" },
-          { id: 8, name: "Piscine de thouars", line: "bus", lineName: "8", direction: "aller" }
-        ]
-      }
-    ];
-  }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
   }
@@ -54,7 +35,7 @@ export class TrajetsComponent implements OnInit {
               && trajet.name[i] == x.name && trajet.direction[i].toLowerCase() == x.direction);
           console.log(stop);
           if (stop != undefined)
-           liste.push(stop);
+            liste.push(stop);
         }
 
         if (liste.length > 0)

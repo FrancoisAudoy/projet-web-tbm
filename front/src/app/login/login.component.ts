@@ -54,9 +54,12 @@ export class LoginComponent implements OnInit {
     let user: UserObject = { email: this.email, pseudo: this.pseudo, password: Md5.hashStr(this.password).toString() };
     this.query.postNewUser(user).subscribe(((resp: Config) => {
       if (resp.success == true) {
-        this.loginService.setToken(resp.token);
-        let messparsed = JSON.parse(resp.message);
-        this.loginService.setUser(user);
+        let userSave: QueryUserObject;
+        userSave.id = resp.message.id;
+        userSave.email = resp.message.email;
+        userSave.pseudo = resp.message.pseudo;
+        userSave.token = resp.token; 
+        this.loginService.setUser(userSave);
         this.loginService.writeLogin();
       }
     }),
@@ -72,9 +75,13 @@ export class LoginComponent implements OnInit {
     let user: UserObject = { email: this.email, pseudo: this.pseudo, password: Md5.hashStr(this.password).toString() };
     this.query.postConnectUser(user).subscribe(((resp: Config) => {
       if (resp.success == true) {
-        this.loginService.setToken(resp.token);
-        user.pseudo = JSON.parse(resp.message).pseudo;
-        this.loginService.setUser(user);
+        let userSave: QueryUserObject = new QueryUserObject;
+        let messParsed = JSON.parse(resp.message);
+        userSave.id = messParsed.id;
+        userSave.email = messParsed.email;
+        userSave.pseudo = messParsed.pseudo;
+        userSave.token = resp.token; 
+        this.loginService.setUser(userSave);
         this.loginService.writeLogin();
       }
     }),

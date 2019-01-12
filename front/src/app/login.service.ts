@@ -19,17 +19,15 @@ export class LoginService {
 
   constructor(private cookieService: CookieService) { }
 
-  setToken(newToken: string) {
-    this.token = newToken;
-    this.loged = true;
-  }
-
   getToken(): string {
     return this.token;
   }
 
-  setUser(user: UserObject) {
-    this.user = {email : user.email, pseudo: user.pseudo, token: this.token};
+  setUser(user: QueryUserObject) {
+    console.log(user);
+    this.user = user;
+    this.token = this.user.token;
+    this.loged = true;
   }
 
   isLoged() {
@@ -56,14 +54,7 @@ export class LoginService {
   }
 
   writeLogin() {
-    let toWrite: QueryUserObject = {
-      email: this.user.email,
-      pseudo: this.user.pseudo,
-      //id: "",
-      token: this.token
-    }
-
-    this.cookieService.set(this.cookieName, JSON.stringify(toWrite));
+    this.cookieService.set(this.cookieName, JSON.stringify(this.user));
   }
 
   checkIfAlreadyConnect() {
@@ -71,7 +62,7 @@ export class LoginService {
       let cookie: string = this.cookieService.get(this.cookieName);
       let cookieParsed: QueryUserObject = JSON.parse(cookie);
       this.user = cookieParsed;
-      this.setToken(cookieParsed.token);
+      this.loged = true;
     }
   }
 
