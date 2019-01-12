@@ -4,20 +4,19 @@
   </mat-card-title>
 
   <mat-card-actions>
-    <button mat-flat-button color="primary"> + </button>
+    <button mat-flat-button color="primary" (click)="openDialog()"> + </button>
   </mat-card-actions>
 
   <mat-card-content class="">
     <ul>
-      <li *ngFor="let arrets of line">
-        <span *ngFor="let arret of arrets.liste">
-          <mat-car-title>
-            <span class="badge">{{arret.lineName}}</span> {{arret.name}}
-          </mat-car-title>
-          <mat-card-subtitle>
-            Temps réel
-          </mat-card-subtitle>
-        </span>
+      <li *ngFor="let arrets of line" class="arrets">
+        <table mat-table >
+            <ng-container matColumnDef="arrets" *ngFor="let arret of arrets.liste">
+              <td mat-cell> <span class="badge">{{arret.lineName}}</span> {{arret.name}}
+                <br/> Temps Réel
+              </td>
+            </ng-container>
+        </table>
       </li>
     </ul>
   </mat-card-content>

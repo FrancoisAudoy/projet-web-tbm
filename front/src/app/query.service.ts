@@ -2,10 +2,9 @@
  * Dans ce service seulement les requêtes sont définient
  */
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UserObject } from './UserObject';
-import { map } from 'rxjs/operators';
-//import * as CUB from "http://data.bordeaux-metropole.fr/api/cub.xjs?key=369BEIMSVY";
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { UserObject, QueryUserObject } from './UserObject';
+import { Stop } from './arret';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,12 +21,22 @@ export class QueryService {
   }
 
   postNewUser(data: UserObject) {
-    console.log("ça part");
     return this.http.post(this.URL + "/user/register?format=json&callback=?", JSON.stringify(data), httpOptions);
   }
 
   postConnectUser(user: UserObject) {
-    console.log("ça part");
     return this.http.post(this.URL + "/user/login?format=json&callback=?", JSON.stringify(user), httpOptions);
+  }
+
+  putAddArret(user: QueryUserObject, stop: Stop) {
+    let dataToSend = { token: user.token, stop: { id: stop.id, name: stop.name, direction: "aller" } };
+    return this.http.put(this.URL + "/stops?format=json&callback=?", JSON.stringify(dataToSend), httpOptions);
+  }
+
+  getAllStopFor(user: QueryUserObject) {
+    //let token = { token: user.token };
+
+    let param = new HttpParams().set("token", user.token);
+    return this.http.get(this.URL + "/stops", { headers: httpOptions.headers, params: param});
   }
 }

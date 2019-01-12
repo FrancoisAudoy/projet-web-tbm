@@ -1,23 +1,25 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { Arret } from '../arret';
+import { Stop } from '../arret';
 
 @Component({
   selector: 'app-dialog-bus',
-  templateUrl: './dialog-bus.component.html',
-  styleUrls: ['./dialog-bus.component.css']
+  templateUrl: './dialog-stop.component.html',
+  styleUrls: ['./dialog-stop.component.css']
 })
-export class DialogBusComponent implements OnInit {
+export class DialogStopComponent implements OnInit {
   private line: number;
   private stop: string;
+  private direction: string;
   private lineNumber: number[] = [];
   private allStopName: string[] = [];
-  private allStop: Arret [] = [];
+  private allStop: Stop [] = [];
+  private allDirections: string[] = ["Aller", "Retour"];
  
 
-  constructor(public dialRef: MatDialogRef<DialogBusComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: Arret[]) {
+  constructor(public dialRef: MatDialogRef<DialogStopComponent>,
+    @Inject(MAT_DIALOG_DATA) private data: Stop[]) {
       this.allStop = data;
     data.forEach(element => {
       if (!this.lineNumber.includes(parseInt(element.lineName)))
@@ -27,7 +29,6 @@ export class DialogBusComponent implements OnInit {
 
   lineChange(){
     this.allStopName = [];
-    console.log("Change " + this.line);
     let filtredStop = this.allStop.filter(x => parseInt(x.lineName) == this.line);
 
     filtredStop.forEach(element => {

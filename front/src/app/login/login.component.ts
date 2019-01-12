@@ -4,45 +4,45 @@
  * Pour créer un compte il est nécessaire d'utiliser tout les champs de la classe UserObject
  * pour se connecter il faut utiliser le pseudo et le mot de passe! l'email n'est pas un pseudo
  */
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { DomSanitizer } from '@angular/platform-browser';
-import { MatIconRegistry } from '@angular/material';
 import { QueryService } from '../query.service';
 import { LoginService } from '../login.service';
 import { Config } from 'protractor';
 import { UserObject, QueryUserObject } from '../UserObject';
+import { Md5 } from '../../../node_modules/ts-md5/dist/md5';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [Md5]
 })
 
 export class LoginComponent implements OnInit {
 
-  private creation: boolean = true;
 
   private email: string;
   private pseudo: string;
   private password: string;
+  private creation: boolean = true;
 
   constructor(private query: QueryService, private loginService: LoginService,
-    private snackBar: MatSnackBar) {
+    private snackBar: MatSnackBar, private md5: Md5) {
   }
 
   createAccount() {
-    this.creation = true;
     this.email = '';
     this.pseudo = '';
     this.password = '';
+    this.creation = true;
   }
 
   connectWithLogin() {
-    this.creation = false;
     this.email = '';
     this.pseudo = '';
     this.password = '';
+    this.creation = false;
   }
 
   openSnackBar(message: string) {
@@ -51,12 +51,12 @@ export class LoginComponent implements OnInit {
 
   onCreateAccount() {
 
-    let user: UserObject = { email: this.email, pseudo: this.pseudo, password: this.password };
+    let user: UserObject = { email: this.email, pseudo: this.pseudo, password: Md5.hashStr(this.password).toString() };
     this.query.postNewUser(user).subscribe(((resp: Config) => {
       if (resp.success == true) {
         this.loginService.setToken(resp.token);
-        let queryUser: QueryUserObject = JSON.parse(resp.message);
-        this.loginService.setUser(queryUser);
+        let messparsed = JSON.parse(resp.message);
+        this.loginService.setUser(user);
         this.loginService.writeLogin();
       }
     }),
@@ -68,13 +68,13 @@ export class LoginComponent implements OnInit {
 
   }
 
-  onConnect(pseudo: string, password: string) {
-    let user: UserObject = { email: this.email, pseudo: this.pseudo, password: this.password };
+  onConnect() {
+    let user: UserObject = { email: this.email, pseudo: this.pseudo, password: Md5.hashStr(this.password).toString() };
     this.query.postConnectUser(user).subscribe(((resp: Config) => {
       if (resp.success == true) {
         this.loginService.setToken(resp.token);
-        let queryUser: QueryUserObject = JSON.parse(resp.message);
-        this.loginService.setUser(queryUser);
+        user.pseudo = JSON.parse(resp.message).pseudo;
+        this.loginService.setUser(user);
         this.loginService.writeLogin();
       }
     }),

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DialogBusComponent } from './dialog-bus.component';
+import { DialogStopComponent } from './dialog-stop.component';
 
-describe('DialogBusComponent', () => {
-  let component: DialogBusComponent;
-  let fixture: ComponentFixture<DialogBusComponent>;
+describe('DialogStopComponent', () => {
+  let component: DialogStopComponent;
+  let fixture: ComponentFixture<DialogStopComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [DialogBusComponent]
+      declarations: [DialogStopComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DialogBusComponent);
+    fixture = TestBed.createComponent(DialogStopComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
