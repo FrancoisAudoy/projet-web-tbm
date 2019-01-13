@@ -21,8 +21,6 @@ export class TrajetsComponent implements OnInit {
 
   ngOnInit() {
     this.query.getAllTripOf(this.login.getUser()).subscribe((resp: []) => {
-      console.log(resp);
-
       for (let i: number = 0; i < resp.length; ++i) {
         let line: [] = resp[i];
         let liste: Stop[] = [];
@@ -50,16 +48,14 @@ export class TrajetsComponent implements OnInit {
     });
 
     dial.afterClosed().subscribe((trajet) => {
-      console.log(trajet)
       if (trajet != undefined) {
 
         let liste: Stop[] = [];
         for (let i: number = 0; i < trajet.size; ++i) {
           let stop: any;
-          if (trajet.lineName[i] != undefined && trajet.name[i] != undefined && trajet.direction[i] != undefined)
-            stop = Stops.find(x => trajet.lineName[i] == x.lineName
+          if (trajet.type[i] != undefined && trajet.name[i] != undefined && trajet.direction[i] != undefined)
+            stop = Stops.find(x => trajet.type[i] == x.type
               && trajet.name[i] == x.name && trajet.direction[i].toLowerCase() == x.direction);
-          console.log(stop);
           if (stop != undefined)
             liste.push(stop);
         }

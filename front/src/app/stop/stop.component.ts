@@ -50,7 +50,7 @@ export class StopComponent implements OnInit {
       if (arret != undefined)
         if (arret.lineName != undefined && arret.name != undefined && arret.direction != undefined) {
           let _stop = Stops.find(stop => stop.name === arret.name &&
-            stop.lineName === arret.lineName && stop.direction == arret.direction.toLowerCase());
+            stop.type === arret.lineName && stop.direction == arret.direction.toLowerCase());
 
           this.query.putAddArret(this.login.getUser(), _stop).subscribe(((resp: Config) => {
             console.log(resp);

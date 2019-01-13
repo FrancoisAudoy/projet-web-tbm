@@ -1,7 +1,9 @@
 import { Component, OnInit, ElementRef, ViewChild, Renderer2, AfterViewInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Stop, Stops } from '../arret';
+import { Stop, Stops, AllLine } from '../arret';
+import { QueryService } from '../query.service';
+import { PersonalSnackBarService } from '../personal-snack-bar.service';
 
 @Component({
   selector: 'app-dynamic-dialog',
@@ -22,7 +24,8 @@ export class DynamicDialogComponent implements OnInit, AfterViewInit {
   private directionPossible: string[] = ["Aller", "Retour"];
 
   constructor(public dialRef: MatDialogRef<DynamicDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: Stop[]) {
+    @Inject(MAT_DIALOG_DATA) private data: Stop[], private query: QueryService,
+    private snackBar: PersonalSnackBarService) {
     this.formIt = Array(this.nbForm).fill(1).map((x, i) => i);
 
     for (let i: number = 0; i < this.nbForm; ++i) {
@@ -31,9 +34,9 @@ export class DynamicDialogComponent implements OnInit, AfterViewInit {
       this.selectedDirection.push(undefined);
       this.possibleStop.push({ stops: undefined });
     }
-    data.forEach(el => {
-      if (!this.allLineName.includes(el.lineName))
-        this.allLineName.push(el.lineName);
+    AllLine.forEach(el => {
+      if (!this.allLineName.includes(el.name))
+        this.allLineName.push(el.name);
     });
   }
 
@@ -54,8 +57,13 @@ export class DynamicDialogComponent implements OnInit, AfterViewInit {
   }
 
   onLineChange(i: number) {
+    this.query.getAllBusStopOfALine(this.selectedLine[i]).subscribe(resp => console.log(resp), 
+    error => {
+      console.log(error);
+      this.snackBar.openSnackBar(error)
+    });
     let stopFiltred = this.data.filter(x => {
-      let result = x.lineName == this.selectedLine[i];
+      let result = x.line == this.selectedLine[i];
       if (this.selectedDirection[i] != undefined)
         result = result && this.selectedDirection[i] == x.direction;
       return result;

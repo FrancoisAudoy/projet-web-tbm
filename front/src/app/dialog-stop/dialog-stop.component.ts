@@ -22,14 +22,14 @@ export class DialogStopComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private data: Stop[]) {
       this.allStop = data;
     data.forEach(element => {
-      if (!this.lineNumber.includes(parseInt(element.lineName)))
-        this.lineNumber.push(parseInt(element.lineName));
+      if (!this.lineNumber.includes(parseInt(element.type)))
+        this.lineNumber.push(parseInt(element.type));
     });
   }
 
   lineChange(){
     this.allStopName = [];
-    let filtredStop = this.allStop.filter(x => parseInt(x.lineName) == this.line);
+    let filtredStop = this.allStop.filter(x => parseInt(x.type) == this.line);
 
     filtredStop.forEach(element => {
       this.allStopName.push(element.name);
