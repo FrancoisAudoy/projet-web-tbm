@@ -1,14 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const morgan=require('morgan');
 const jwt    = require('jsonwebtoken');
 const cors=require('cors');
 const config=require('./Config');
 const app=express();
-app.listen(3000);
+app.listen(process.env.PORT ||3000, function(){
+  console.log("Server starting on port %d in %s mode", this.address().port, app.settings.env);
+});
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
-app.use(morgan('dev'));
 app.use(cors());
 
 app.use('/user', require('./ServerUser'));
