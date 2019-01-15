@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Trip, Stops, Stop } from '../arret';
+import { Trip, Stops, Stop, AllLine, Line } from '../arret';
 import { DynamicDialogComponent } from '../dynamic-dialog/dynamic-dialog.component';
 import { LoginService } from '../login.service';
 import { QueryService } from '../query.service';
 import { PersonalSnackBarService } from '../personal-snack-bar.service';
-import { LineToLineMappedSource } from 'webpack-sources';
 
 @Component({
   selector: 'app-trajets',
@@ -17,29 +16,43 @@ export class TrajetsComponent implements OnInit {
   private trip: Trip[] = [];
 
   constructor(private dialog: MatDialog, private login: LoginService,
-    private query: QueryService, private snackBar: PersonalSnackBarService) { }
+    private query: QueryService, private snackBar: PersonalSnackBarService) {
+    let time: Date = new Date();
+    console.log("Trajet");
+    console.log(time.getMinutes() + ":" + time.getSeconds() + ":" + time.getMilliseconds());
+    setTimeout(() => {
+      this.query.getAllTripOf(this.login.getUser()).subscribe((resp: []) => {
+        for (let i: number = 0; i < resp.length; ++i) {
+          let line: [] = resp[i];
+          let liste: Stop[] = [];
 
-  ngOnInit() {
-    this.query.getAllTripOf(this.login.getUser()).subscribe((resp: []) => {
-      for (let i: number = 0; i < resp.length; ++i) {
-        let line: [] = resp[i];
-        let liste: Stop[] = [];
-        if (line.length > 0) {
-          line.forEach((el: any) => {
-            let stop: Stop = Stops.find(x => el._id == x.id && el._direction == x.direction);
-            if (stop != undefined)
-              liste.push(stop);
-          });
-          if (liste.length > 0)
-            this.trip.push({ liste: liste });
+          if (line.length > 0) {
+            line.forEach((el: any) => {
+
+              if (el != null) {
+                let concernedLine: Line = AllLine.find(line => el._line[0][0] == line.name);
+                if (concernedLine != undefined) {
+                  let _stop = concernedLine.stops.find(stop => el._id == stop.id)
+                  if (_stop != undefined)
+                    liste.push(_stop);
+                }
+              }
+            });
+
+            if (liste.length > 0)
+              this.trip.push({ liste: liste });
+
+          }
         }
-      }
-    },
-      error => {
-        this.snackBar.openSnackBar(error.message);
-        console.log(error.message);
-      })
+      },
+        error => {
+          this.snackBar.openSnackBar(error.message);
+          console.log(error.message);
+        })
+    }, 8000);
   }
+
+  ngOnInit() { }
 
   openDialog() {
     const dial = this.dialog.open(DynamicDialogComponent, {
@@ -53,9 +66,10 @@ export class TrajetsComponent implements OnInit {
         let liste: Stop[] = [];
         for (let i: number = 0; i < trajet.size; ++i) {
           let stop: any;
-          if (trajet.type[i] != undefined && trajet.name[i] != undefined && trajet.direction[i] != undefined)
-            stop = Stops.find(x => trajet.type[i] == x.type
-              && trajet.name[i] == x.name && trajet.direction[i].toLowerCase() == x.direction);
+          if (trajet.lineName[i] != undefined && trajet.name[i] != undefined && trajet.direction[i] != undefined) {
+            let concernedLine: Line = AllLine.find(line => trajet.lineName[i] == line.name);
+            stop = concernedLine.stops.find(x => trajet.name[i] == x.id);
+          }
           if (stop != undefined)
             liste.push(stop);
         }

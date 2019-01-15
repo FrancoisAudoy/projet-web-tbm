@@ -1,15 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Stop, Stops } from '../arret';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Stop, Stops, AllLine } from '../arret';
 import { DialogStopComponent } from '../dialog-stop/dialog-stop.component';
-import { ScriptService } from '../script-service.service';
 import { QueryService } from '../query.service';
 import { LoginService } from '../login.service';
 import { Config } from 'protractor';
 import { PersonalSnackBarService } from '../personal-snack-bar.service';
-
-declare var CUB: any;
 
 @Component({
   selector: 'app-stop',
@@ -19,25 +15,32 @@ declare var CUB: any;
 export class StopComponent implements OnInit {
 
   SelectedStop: Stop[] = [];
-  URL: string = 'https://data.bordeaux-metropole.fr/csv?key=369BEIMSVY';
-  constructor(public dialRef: MatDialog, private scriptService: ScriptService,
+  constructor(public dialRef: MatDialog,
     private query: QueryService, private login: LoginService,
-    private snackBar: PersonalSnackBarService) { }
+    private snackBar: PersonalSnackBarService) {
+    let time: Date = new Date();
+    console.log("Stop");
+    console.log(time.getMinutes() + ":" + time.getSeconds() + ":" + time.getMilliseconds());
+    setTimeout(() => {
+      this.query.getAllStopFor(this.login.getUser()).subscribe(((resp: Config) => {
+        resp.forEach(element => {
+          let _line = AllLine.find(line => line.name == element._line[0][0]);
+          if (_line != undefined) {
+            let _stop: Stop = _line.stops.find(stop => stop.id == element._id);
+            if (_stop != undefined)
+              this.SelectedStop.push(_stop);
+          }
+        });
 
-  ngOnInit() {
-    this.query.getAllStopFor(this.login.getUser()).subscribe(((resp: Config) => {
-      resp.forEach(element => {
-        let _stop = Stops.find(stop => stop.name == element._name && stop.id == element._id);
-        if (_stop != undefined)
-          this.SelectedStop.push(_stop);
-      });
-
-    }),
-      (error => {
-        this.snackBar.openSnackBar(error.message);
-        console.log(error.message);
-      }));
+      }),
+        (error => {
+          this.snackBar.openSnackBar(error.message);
+          console.log(error.message);
+        }));
+    }, 8000);
   }
+
+  ngOnInit() { }
 
 
   openDialog() {
@@ -49,8 +52,11 @@ export class StopComponent implements OnInit {
     diagRef.afterClosed().subscribe((arret) => {
       if (arret != undefined)
         if (arret.lineName != undefined && arret.name != undefined && arret.direction != undefined) {
-          let _stop = Stops.find(stop => stop.name === arret.name &&
-            stop.type === arret.lineName && stop.direction == arret.direction.toLowerCase());
+          let line = AllLine.find(line => line.name === arret.lineName);
+
+          let _stop = line.stops.find(stop => stop.id === arret.name);
+          _stop.line.push(line.name);
+          console.log(line);
 
           this.query.putAddArret(this.login.getUser(), _stop).subscribe(((resp: Config) => {
             console.log(resp);

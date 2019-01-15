@@ -24,7 +24,6 @@ export class LoginService {
   }
 
   setUser(user: QueryUserObject) {
-    console.log(user);
     this.user = user;
     this.token = this.user.token;
     this.loged = true;

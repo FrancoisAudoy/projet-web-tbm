@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
-import { Stop } from '../arret';
+import { Stop, AllLine, Line } from '../arret';
 
 @Component({
   selector: 'app-dialog-bus',
@@ -9,38 +9,31 @@ import { Stop } from '../arret';
   styleUrls: ['./dialog-stop.component.css']
 })
 export class DialogStopComponent implements OnInit {
-  private line: number;
+  private line: string;
   private stop: string;
   private direction: string;
-  private lineNumber: number[] = [];
-  private allStopName: string[] = [];
-  private allStop: Stop [] = [];
+  private allLineName: string[] = [];
+  private allStop: Stop[] = [];
   private allDirections: string[] = ["Aller", "Retour"];
- 
 
-  constructor(public dialRef: MatDialogRef<DialogStopComponent>,
-    @Inject(MAT_DIALOG_DATA) private data: Stop[]) {
-      this.allStop = data;
-    data.forEach(element => {
-      if (!this.lineNumber.includes(parseInt(element.type)))
-        this.lineNumber.push(parseInt(element.type));
+
+  constructor(public dialRef: MatDialogRef<DialogStopComponent>) {
+    AllLine.forEach(element => {
+      if (!this.allLineName.includes(element.name))
+        this.allLineName.push(element.name);
     });
   }
 
-  lineChange(){
-    this.allStopName = [];
-    let filtredStop = this.allStop.filter(x => parseInt(x.type) == this.line);
+  lineChange() {
+    let filtredStop: Line = AllLine.find(line => line.name == this.line);
+    this.allStop = filtredStop.stops;
 
-    filtredStop.forEach(element => {
-      this.allStopName.push(element.name);
-    });
-    
   }
 
   ngOnInit() {
   }
 
-  onNoClick() {
+  onCancelClick() {
     this.dialRef.close();
   }
 }

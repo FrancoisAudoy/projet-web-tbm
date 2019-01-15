@@ -1,8 +1,9 @@
 import { Component, OnInit, ElementRef, ViewChild, Renderer2, AfterViewInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Stop, Stops, AllLine } from '../arret';
+import { Stop, Stops, AllLine, Line } from '../arret';
 import { QueryService } from '../query.service';
+import { parseString } from 'xml2js';
 import { PersonalSnackBarService } from '../personal-snack-bar.service';
 
 @Component({
@@ -32,7 +33,7 @@ export class DynamicDialogComponent implements OnInit, AfterViewInit {
       this.selectedLine.push(undefined);
       this.selectedStop.push(undefined);
       this.selectedDirection.push(undefined);
-      this.possibleStop.push({ stops: undefined });
+      this.possibleStop.push({ stops: [] });
     }
     AllLine.forEach(el => {
       if (!this.allLineName.includes(el.name))
@@ -52,24 +53,21 @@ export class DynamicDialogComponent implements OnInit, AfterViewInit {
     this.selectedLine.push(undefined);
     this.selectedStop.push(undefined);
     this.selectedDirection.push(undefined);
-    this.possibleStop.push({ stops: undefined });
+    this.possibleStop.push({ stops: [] });
 
   }
 
-  onLineChange(i: number) {
-    this.query.getAllBusStopOfALine(this.selectedLine[i]).subscribe(resp => console.log(resp), 
-    error => {
-      console.log(error);
-      this.snackBar.openSnackBar(error)
-    });
-    let stopFiltred = this.data.filter(x => {
-      let result = x.line == this.selectedLine[i];
-      if (this.selectedDirection[i] != undefined)
-        result = result && this.selectedDirection[i] == x.direction;
-      return result;
-    });
-    this.possibleStop[i].stops = [];
-    stopFiltred.forEach(el => { this.possibleStop[i].stops.push(el.name) });
+  onCancelClick() {
+    this.dialRef.close();
+  }
 
+  onLineChange(i: number) {
+    let line = this.selectedLine[i];
+    this.possibleStop[i].stops = [];
+
+    let onlyConcernedLine: Line = AllLine.find(el => el.name == line);
+
+    if (onlyConcernedLine != undefined)
+      this.possibleStop[i].stops = onlyConcernedLine.stops;
   }
 }
