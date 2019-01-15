@@ -23,8 +23,9 @@ export class StopComponent implements OnInit {
     console.log(time.getMinutes() + ":" + time.getSeconds() + ":" + time.getMilliseconds());
     setTimeout(() => {
       this.query.getAllStopFor(this.login.getUser()).subscribe(((resp: Config) => {
+        console.log(resp);
         resp.forEach(element => {
-          let _line = AllLine.find(line => line.name == element._line[0][0]);
+          let _line = AllLine.find(line => line.name == element._line[0]);
           if (_line != undefined) {
             let _stop: Stop = _line.stops.find(stop => stop.id == element._id);
             if (_stop != undefined)

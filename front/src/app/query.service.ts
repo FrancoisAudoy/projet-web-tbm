@@ -29,6 +29,7 @@ export class QueryService {
   }
 
   putAddArret(user: QueryUserObject, stop: Stop) {
+    console.log(stop);
     let dataToSend = { token: user.token, stop: { id: stop.id, name: stop.name, direction: stop.direction } };
     return this.http.put(this.URL + "/user/" + user.id + "/stops?format=json&callback=?", JSON.stringify(dataToSend), httpOptions);
   }

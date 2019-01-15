@@ -13,7 +13,7 @@ import { PersonalSnackBarService } from '../personal-snack-bar.service';
 })
 export class TrajetsComponent implements OnInit {
 
-  private trip: Trip[] = [];
+  public trip: Trip[] = [];
 
   constructor(private dialog: MatDialog, private login: LoginService,
     private query: QueryService, private snackBar: PersonalSnackBarService) {
@@ -30,7 +30,7 @@ export class TrajetsComponent implements OnInit {
             line.forEach((el: any) => {
 
               if (el != null) {
-                let concernedLine: Line = AllLine.find(line => el._line[0][0] == line.name);
+                let concernedLine: Line = AllLine.find(line => el._line[0] == line.name);
                 if (concernedLine != undefined) {
                   let _stop = concernedLine.stops.find(stop => el._id == stop.id)
                   if (_stop != undefined)

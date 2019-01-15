@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { LoginService } from './login.service'
 import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -19,7 +19,7 @@ import { Timeouts } from 'selenium-webdriver';
 export class AppComponent implements OnInit {
   title = 'front';
 
-  constructor(private login: LoginService, private iconRegister: MatIconRegistry, sanitizer: DomSanitizer,
+  constructor(public login: LoginService, private iconRegister: MatIconRegistry, sanitizer: DomSanitizer,
     private query: QueryService, private cookieService: CookieService, private personalSnack: PersonalSnackBarService) {
     this.iconRegister.addSvgIcon("cross", sanitizer.bypassSecurityTrustResourceUrl("assets/icons/icon-cross.svg"));
 
@@ -76,8 +76,6 @@ export class AppComponent implements OnInit {
       for (let it: number = 0; it < allStopTBM.length; ++it) {
         let lineDes = allStopTBM[it]["bm:TB_ARRET_P"][0]["bm:LIGNEDES"][0];
         lineDes = lineDes.split('/');
-        if (lineDes.length == 1)
-          lineDes = [lineDes];
 
         lineDes.forEach((lineName: string) => {
           let LineConcerned: Line[] = AllLine.filter(line => line.name == lineName);
@@ -92,9 +90,6 @@ export class AppComponent implements OnInit {
           })
         });
       }
-      let time: Date = new Date();
-    console.log("APP");
-    console.log(time.getMinutes() + ":" + time.getSeconds() + ":" + time.getMilliseconds());
     },
       (error) => {
         console.log(error);

@@ -13,12 +13,12 @@ import { PersonalSnackBarService } from '../personal-snack-bar.service';
 })
 export class DynamicDialogComponent implements OnInit, AfterViewInit {
 
-  private nbForm: number = 2;
-  private formIt: any = [];
+  public nbForm: number = 2;
+  public formIt: any = [];
 
-  private selectedLine: any[] = [];
-  private selectedStop: any[] = [];
-  private selectedDirection: any[] = [];
+  public selectedLine: any[] = [];
+  public selectedStop: any[] = [];
+  public selectedDirection: any[] = [];
 
   private allLineName: string[] = [];
   private possibleStop: any[] = [];

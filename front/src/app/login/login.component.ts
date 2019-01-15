@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   private email: string;
   private pseudo: string;
   private password: string;
-  private creation: boolean = true;
+  public creation: boolean = true;
 
   constructor(private query: QueryService, private loginService: LoginService,
     private snackBar: MatSnackBar, private md5: Md5) {
@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
 
     let user: UserObject = { email: this.email, pseudo: this.pseudo, password: Md5.hashStr(this.password).toString() };
     this.query.postNewUser(user).subscribe(((resp: Config) => {
+      console.log(resp);
       if (resp.success == true) {
         let userSave: QueryUserObject;
         userSave.id = resp.message.id;

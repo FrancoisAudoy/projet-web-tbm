@@ -9,12 +9,12 @@ import { Stop, AllLine, Line } from '../arret';
   styleUrls: ['./dialog-stop.component.css']
 })
 export class DialogStopComponent implements OnInit {
-  private line: string;
-  private stop: string;
-  private direction: string;
-  private allLineName: string[] = [];
-  private allStop: Stop[] = [];
-  private allDirections: string[] = ["Aller", "Retour"];
+  public line: string;
+  public stop: string;
+  public direction: string;
+  public allLineName: string[] = [];
+  public allStop: Stop[] = [];
+  public allDirections: string[] = ["Aller", "Retour"];
 
 
   constructor(public dialRef: MatDialogRef<DialogStopComponent>) {
