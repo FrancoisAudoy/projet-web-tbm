@@ -18,9 +18,7 @@ export class StopComponent implements OnInit {
   constructor(public dialRef: MatDialog,
     private query: QueryService, private login: LoginService,
     private snackBar: PersonalSnackBarService) {
-    let time: Date = new Date();
-    console.log("Stop");
-    console.log(time.getMinutes() + ":" + time.getSeconds() + ":" + time.getMilliseconds());
+
     setTimeout(() => {
       this.query.getAllStopFor(this.login.getUser()).subscribe(((resp: Config) => {
         console.log(resp);
@@ -33,11 +31,7 @@ export class StopComponent implements OnInit {
           }
         });
 
-      }),
-        (error => {
-          this.snackBar.openSnackBar(error.message);
-          console.log(error.message);
-        }));
+      }));
     }, 8000);
   }
 

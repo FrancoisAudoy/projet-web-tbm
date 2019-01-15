@@ -17,9 +17,7 @@ export class TrajetsComponent implements OnInit {
 
   constructor(private dialog: MatDialog, private login: LoginService,
     private query: QueryService, private snackBar: PersonalSnackBarService) {
-    let time: Date = new Date();
-    console.log("Trajet");
-    console.log(time.getMinutes() + ":" + time.getSeconds() + ":" + time.getMilliseconds());
+  
     setTimeout(() => {
       this.query.getAllTripOf(this.login.getUser()).subscribe((resp: []) => {
         for (let i: number = 0; i < resp.length; ++i) {
@@ -44,11 +42,7 @@ export class TrajetsComponent implements OnInit {
 
           }
         }
-      },
-        error => {
-          this.snackBar.openSnackBar(error.message);
-          console.log(error.message);
-        })
+      });
     }, 8000);
   }
 
