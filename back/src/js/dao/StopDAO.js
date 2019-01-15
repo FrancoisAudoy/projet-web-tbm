@@ -32,6 +32,7 @@ module.exports= class StopDAO{
       stop=new Stop(inBase._id, inBase._name, inBase._line, inBase._direction);
     }
     client.close();
+    console.log(stop);
     return stop;
   }
 
