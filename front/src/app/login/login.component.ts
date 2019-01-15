@@ -55,10 +55,12 @@ export class LoginComponent implements OnInit {
     this.query.postNewUser(user).subscribe(((resp: Config) => {
       console.log(resp);
       if (resp.success == true) {
-        let userSave: QueryUserObject;
-        userSave.id = resp.message.id;
-        userSave.email = resp.message.email;
-        userSave.pseudo = resp.message.pseudo;
+        let userSave: QueryUserObject = new QueryUserObject;
+        let messParsed = JSON.parse(resp.message);
+        console.log(messParsed);
+        userSave.id = messParsed.id;
+        userSave.email = messParsed.email;
+        userSave.pseudo = messParsed.pseudo;
         userSave.token = resp.token; 
         this.loginService.setUser(userSave);
         this.loginService.writeLogin();
