@@ -1,0 +1,25 @@
+<mat-card class="trajets">
+  <mat-card-title>
+    <h2>Mes Trajets</h2>
+  </mat-card-title>
+
+  <mat-card-actions>
+    <button mat-flat-button color="primary" (click)="openDialog()"> + </button>
+  </mat-card-actions>
+
+  <mat-card-content class="">
+    <ul>
+      <li *ngFor="let arrets of trip" class="arrets">
+        <table mat-table>
+          <ng-container matColumnDef="arrets" *ngFor="let arret of arrets.liste">
+            <td mat-cell class="cellTable">
+              <mat-card-title class="elementTable"><span class="badge">{{arret.line}}</span> {{arret.name}}</mat-card-title>
+              <mat-card-subtitle> Temps Réel</mat-card-subtitle>
+            </td>
+          </ng-container>
+        </table>
+      </li>
+    </ul>
+  </mat-card-content>
+
+</mat-card>

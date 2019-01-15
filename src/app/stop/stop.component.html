@@ -1,0 +1,20 @@
+<mat-card class='arrets'>
+  <mat-card-title>
+    <h2>Mes Arrêts</h2>
+  </mat-card-title>
+
+  <mat-card-actions>
+    <button mat-flat-button color="primary" (click)="openDialog()"> + </button>
+  </mat-card-actions>
+
+  <mat-card-content class="arret">
+    <ul>
+      <li *ngFor="let arret of SelectedStop">
+        <span class="badge arret">{{arret.line}}</span> {{arret.name}}
+      </li>
+    </ul>
+  </mat-card-content>
+
+</mat-card>
+
+  <div id='zone-carte' style="display: none"></div>

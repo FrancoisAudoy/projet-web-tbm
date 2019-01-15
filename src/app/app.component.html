@@ -1,0 +1,25 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div *ngIf="login.isLoged()">
+  <div style="text-align:center">
+    <h1>
+      Bonjour {{ this.login.getUser().pseudo }}!
+      <button mat-stroked-button (click)="disconnect()">Deconnection</button>
+    </h1>
+  </div>
+  
+<div class="panel">
+    <app-trajets></app-trajets>
+</div>
+<div class="panel">
+    <app-stop></app-stop>
+</div>
+  <!--<p>
+    <ngb-alert *ngIf="!closed" (close)="closed=true">
+      <strong>Warning!</strong> Sample alert.
+    </ngb-alert>
+  </p>-->
+</div>
+
+<div *ngIf="!login.isLoged()">
+  <app-login></app-login>
+</div>

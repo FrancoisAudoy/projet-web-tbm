@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "node front/heroku-server.js",
-    "build": "cd front; ng build",
-    "test": "cd front; ng test --watch=false",
-    "lint": "cd front; ng lint",
-    "e2e": "cd front; ng e2e",
-    "postinstall": "cd front; ng build --aot --prod"
+    "start": "node heroku-server.js",
+    "build": "ng build",
+    "test": "ng test --watch=false",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "postinstall": "ng build --aot --prod"
   },
   "private": true,
   "dependencies": {

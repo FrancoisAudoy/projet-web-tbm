@@ -1,0 +1,23 @@
+.arrets {
+    margin: 1%;
+}
+
+table{
+    width: 50%;
+
+}
+
+.elementTable{
+    font-size: 110%;
+}
+
+.cellTable{
+    width: 0.5%;
+}
+
+.trajets{
+    max-height: 10%;
+    max-width: 75%;
+    margin: auto;
+    padding: auto;
+}
