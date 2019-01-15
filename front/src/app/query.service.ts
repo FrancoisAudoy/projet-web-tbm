@@ -14,7 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class QueryService {
-  URL = "http://localhost:3000";
+  URL = "https://projet-web-tbm.herokuapp.com";
   URL_Horaires = "http://data.bordeaux-metropole.fr/data.php?layer=SV_ARRET_P?key=369BEIMSVY";
   constructor(private http: HttpClient) {
     //console.log(CUB);
@@ -30,7 +30,7 @@ export class QueryService {
 
   putAddArret(user: QueryUserObject, stop: Stop) {
     console.log(stop);
-    let dataToSend = { token: user.token, stop: { id: stop.id, name: stop.name, direction: stop.direction } };
+    let dataToSend = { token: user.token, stop: { id: stop.id, name: stop.name, direction: stop.direction, line: stop.line } };
     return this.http.put(this.URL + "/user/" + user.id + "/stops?format=json&callback=?", JSON.stringify(dataToSend), httpOptions);
   }
 
