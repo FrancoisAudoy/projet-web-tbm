@@ -62,7 +62,7 @@ export class QueryService {
   }
 
   getAllBusStop(){
-    return this.http.get("http://data.bordeaux-metropole.fr/wfs?key=369BEIMSVY&REQUEST=GetFeature&SERVICE=WFS&VERSION=1.1.0&TYPENAME=bm:TB_ARRET_P&SRSNAME=EPSG:3945&FILTER=<Filter><PropertyIsEqualTo><PropertyName>RESEAU</PropertyName><Literal>BUS</Literal></PropertyIsEqualTo></Filter>&MAXFEATURES=4000",
+    return this.http.get("https://data.bordeaux-metropole.fr/wfs?key=369BEIMSVY&REQUEST=GetFeature&SERVICE=WFS&VERSION=1.1.0&TYPENAME=bm:TB_ARRET_P&SRSNAME=EPSG:3945&FILTER=<Filter><PropertyIsEqualTo><PropertyName>RESEAU</PropertyName><Literal>BUS</Literal></PropertyIsEqualTo></Filter>&MAXFEATURES=4000",
     {responseType: 'text'});
   }
 
