@@ -73,7 +73,6 @@ export class TrajetsComponent implements OnInit {
           this.query.putAddTripOf(this.login.getUser(), { liste: liste }).subscribe(null,
             error => {
               this.snackBar.openSnackBar(error.message);
-              console.log(error.message);
             });
         }
 

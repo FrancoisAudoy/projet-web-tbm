@@ -40,11 +40,7 @@ export class AppComponent implements OnInit {
           stops: []
         });
       });
-    },
-      (error => {
-        console.log("erreur :");
-        console.log(error);
-      }));
+    });
 
     this.retrieveAllStops();
     if (!this.cookieAllreadyExist())
@@ -92,7 +88,6 @@ export class AppComponent implements OnInit {
       }
     },
       (error) => {
-        console.log(error);
         this.personalSnack.openSnackBar(error);
       });
   }

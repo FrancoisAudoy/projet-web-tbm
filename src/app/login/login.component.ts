@@ -53,11 +53,9 @@ export class LoginComponent implements OnInit {
 
     let user: UserObject = { email: this.email, pseudo: this.pseudo, password: Md5.hashStr(this.password).toString() };
     this.query.postNewUser(user).subscribe(((resp: Config) => {
-      console.log(resp);
       if (resp.success == true) {
         let userSave: QueryUserObject = new QueryUserObject;
         let messParsed = JSON.parse(resp.message);
-        console.log(messParsed);
         userSave.id = messParsed.id;
         userSave.email = messParsed.email;
         userSave.pseudo = messParsed.pseudo;
@@ -68,7 +66,6 @@ export class LoginComponent implements OnInit {
     }),
       (error => {
         this.openSnackBar(error.message);
-        console.log(error.message);
       }
       ));
 
@@ -90,7 +87,6 @@ export class LoginComponent implements OnInit {
     }),
       (error => {
         this.openSnackBar(error.message);
-        console.log(error.message);
       }
       ));
   }
