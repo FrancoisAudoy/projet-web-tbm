@@ -40,7 +40,10 @@ export class AppComponent implements OnInit {
           stops: []
         });
       });
-    });
+    },
+      (error => {
+
+      }));
 
     this.retrieveAllStops();
     if (!this.cookieAllreadyExist())

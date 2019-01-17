@@ -62,4 +62,16 @@ export class StopComponent implements OnInit {
         }
     });
   }
+
+  deleteStop(stop: Stop) {
+    this.query.deleteStop(this.login.getUser(), stop).subscribe(
+      () => {
+        
+        let index = this.SelectedStop.indexOf(stop);
+        this.SelectedStop.splice(index, 1);
+      },
+      (error) => this.snackBar.openSnackBar(error.message));
+    
+  }
+
 }

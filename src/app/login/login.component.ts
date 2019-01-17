@@ -56,10 +56,11 @@ export class LoginComponent implements OnInit {
       if (resp.success == true) {
         let userSave: QueryUserObject = new QueryUserObject;
         let messParsed = JSON.parse(resp.message);
+
         userSave.id = messParsed.id;
         userSave.email = messParsed.email;
         userSave.pseudo = messParsed.pseudo;
-        userSave.token = resp.token; 
+        userSave.token = resp.token;
         this.loginService.setUser(userSave);
         this.loginService.writeLogin();
       }
@@ -80,7 +81,7 @@ export class LoginComponent implements OnInit {
         userSave.id = messParsed.id;
         userSave.email = messParsed.email;
         userSave.pseudo = messParsed.pseudo;
-        userSave.token = resp.token; 
+        userSave.token = resp.token;
         this.loginService.setUser(userSave);
         this.loginService.writeLogin();
       }

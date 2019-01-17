@@ -15,7 +15,6 @@ const httpOptions = {
 })
 export class QueryService {
   URL = "https://projet-web-tbm.herokuapp.com";
-  URL_Horaires = "http://data.bordeaux-metropole.fr/data.php?layer=SV_ARRET_P?key=369BEIMSVY";
   constructor(private http: HttpClient) {
   }
 
@@ -61,9 +60,19 @@ export class QueryService {
       { responseType: 'text' });
   }
 
-  getAllBusStop(){
+  getAllBusStop() {
     return this.http.get("https://data.bordeaux-metropole.fr/wfs?key=369BEIMSVY&REQUEST=GetFeature&SERVICE=WFS&VERSION=1.1.0&TYPENAME=bm:TB_ARRET_P&SRSNAME=EPSG:3945&FILTER=<Filter><PropertyIsEqualTo><PropertyName>RESEAU</PropertyName><Literal>BUS</Literal></PropertyIsEqualTo></Filter>&MAXFEATURES=4000",
-    {responseType: 'text'});
+      { responseType: 'text' });
+  }
+
+  deleteTrip(user: QueryUserObject, trip: Trip) {
+    let dataToSend = { token: user.token, path: trip.liste };
+    return this.http.request('delete', this.URL + "/user/" + user.id + "/paths?format=json&callback=?", { body: JSON.stringify(dataToSend), headers: httpOptions.headers })
+  }
+
+  deleteStop(user: QueryUserObject, stop: Stop) {
+    let dataToSend = { token: user.token, stop: { id: stop.id, name: stop.name, direction: stop.direction, line: stop.line } };
+    return this.http.request('delete', this.URL + "/user/" + user.id + "/stops?format=json&callback=?", { body: JSON.stringify(dataToSend), headers: httpOptions.headers });
   }
 
 }

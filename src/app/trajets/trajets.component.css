@@ -21,3 +21,7 @@ table{
     margin: auto;
     padding: auto;
 }
+
+.cellTableButton{
+    width: 0.01%;
+}

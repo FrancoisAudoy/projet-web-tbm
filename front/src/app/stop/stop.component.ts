@@ -68,7 +68,6 @@ export class StopComponent implements OnInit {
       () => {
         
         let index = this.SelectedStop.indexOf(stop);
-        console.log(index);
         this.SelectedStop.splice(index, 1);
       },
       (error) => this.snackBar.openSnackBar(error.message));
