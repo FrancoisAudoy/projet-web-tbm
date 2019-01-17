@@ -21,7 +21,6 @@ export class StopComponent implements OnInit {
 
     setTimeout(() => {
       this.query.getAllStopFor(this.login.getUser()).subscribe(((resp: Config) => {
-        console.log(resp);
         resp.forEach(element => {
           let _line = AllLine.find(line => line.name == element._line[0]);
           if (_line != undefined) {
@@ -51,19 +50,30 @@ export class StopComponent implements OnInit {
 
           let _stop = line.stops.find(stop => stop.id === arret.name);
           _stop.line.push(line.name);
-          console.log(line);
 
           this.query.putAddArret(this.login.getUser(), _stop).subscribe(((resp: Config) => {
-            console.log(resp);
             if (resp != undefined && _stop != undefined)
               this.SelectedStop.push(_stop);
           }), (error => {
             this.snackBar.openSnackBar(error.message);
-            console.log(error.message);
           }));
 
 
         }
     });
   }
+
+  deleteStop(stop: Stop) {
+    console.log(stop);
+    this.query.deleteStop(this.login.getUser(), stop).subscribe(
+      () => {
+        
+        let index = this.SelectedStop.indexOf(stop);
+        console.log(index);
+        this.SelectedStop.splice(index, 1);
+      },
+      (error) => this.snackBar.openSnackBar(error.message));
+    
+  }
+
 }

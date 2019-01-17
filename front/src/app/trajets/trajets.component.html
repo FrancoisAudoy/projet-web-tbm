@@ -11,8 +11,13 @@
     <ul>
       <li *ngFor="let arrets of trip" class="arrets">
         <table mat-table>
+          <td mat-cell class="cellTableButton">
+            <button mat-icon-button (click)='deleteTrip(arrets)'>
+              <mat-icon svgIcon="cross"></mat-icon>
+            </button></td>
           <ng-container matColumnDef="arrets" *ngFor="let arret of arrets.liste">
             <td mat-cell class="cellTable">
+
               <mat-card-title class="elementTable"><span class="badge">{{arret.line}}</span> {{arret.name}}</mat-card-title>
               <mat-card-subtitle> Temps Réel</mat-card-subtitle>
             </td>
