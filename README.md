@@ -1,7 +1,7 @@
 # projet-web-tbm
 
 ## Sujet
-Création d’un site web permettant d’enregistrer et de visionner les prochains passage de transports en commun.
+Création d’un site web permettant d’enregistrer et de visionner les prochains passages de transports en commun.
 Le site est une SPA. Le projet contient la création d'une API REST pour stocker les informations, ainsi que l'utilisation de l'API open data ([https://data.bordeaux-metropole.fr/](https://data.bordeaux-metropole.fr/)).
 Le projet est réalisé dans le cadre de l'UE de Programmation Web.
 
