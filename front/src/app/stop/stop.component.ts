@@ -64,7 +64,6 @@ export class StopComponent implements OnInit {
   }
 
   deleteStop(stop: Stop) {
-    console.log(stop);
     this.query.deleteStop(this.login.getUser(), stop).subscribe(
       () => {
         
