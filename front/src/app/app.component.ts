@@ -42,8 +42,7 @@ export class AppComponent implements OnInit {
       });
     },
       (error => {
-        console.log("erreur :");
-        console.log(error);
+
       }));
 
     this.retrieveAllStops();
@@ -92,7 +91,6 @@ export class AppComponent implements OnInit {
       }
     },
       (error) => {
-        console.log(error);
         this.personalSnack.openSnackBar(error);
       });
   }

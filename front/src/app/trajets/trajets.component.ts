@@ -17,7 +17,7 @@ export class TrajetsComponent implements OnInit {
 
   constructor(private dialog: MatDialog, private login: LoginService,
     private query: QueryService, private snackBar: PersonalSnackBarService) {
-  
+
     setTimeout(() => {
       this.query.getAllTripOf(this.login.getUser()).subscribe((resp: []) => {
         for (let i: number = 0; i < resp.length; ++i) {
@@ -73,12 +73,21 @@ export class TrajetsComponent implements OnInit {
           this.query.putAddTripOf(this.login.getUser(), { liste: liste }).subscribe(null,
             error => {
               this.snackBar.openSnackBar(error.message);
-              console.log(error.message);
             });
         }
 
       }
     });
+  }
+
+  deleteTrip(trip: Trip) {
+    this.query.deleteTrip(this.login.getUser(), trip).subscribe(
+      (res) => {
+        let index = this.trip.indexOf(trip);
+        this.trip.splice(index, 1);
+      },
+      (error) => { this.snackBar.openSnackBar(error.message); }
+    )
   }
 
 }
